@@ -1,0 +1,45 @@
+{
+  "name": "commanage-app-backend",
+  "version": "1.0.0",
+  "description": "commanage-app-backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "prod": "NODE_ENV=production node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/potter1990po/Com-management"
+  },
+  "homepage": "",
+  "keywords": [
+    "TODO-APP",
+    "MERN",
+    "MongoDB",
+    "NodeJS",
+    "ExpressJS",
+    "ReactJS",
+    "Mongoose",
+    "Express",
+    "MongoDB"
+  ],
+  "author": "Potter",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.5",
+    "nodemon": "^3.1.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2"
+  }
+}
