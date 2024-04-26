@@ -1,0 +1,186 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  margin: 0;
+    font-family:
+		system-ui,
+		-apple-system, /* Firefox supports this but not yet `system-ui` */
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.flame-effect {
+  background: linear-gradient(to bottom,
+        #222222 0%,
+      /* Transparent white at the top */
+      #328336 10%,
+      /* Bright red with moderate opacity */
+      #64cc4f 50%,
+
+      #b2e05b 90%,
+      /* Bright red with high opacity */
+      	#fbfbfd 100%
+      /* Transparent white at the bottom */
+    );
+  animation: flame 1s infinite;
+}
+
+/* Add this CSS to your stylesheet or component */
+.custom-gradient {
+  background-image: linear-gradient(to right, #b2e05b, #328336);
+}
+
+@keyframes flame {
+  0% {
+    background-size: 100% 150%;
+  }
+
+  100% {
+    background-size: 100% 200%;
+  }
+}
+
+@keyframes progressAnimation {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -20% 0;
+  }
+}
+
+@keyframes progressBorderAnimation {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -20% 0;
+  }
+}
+
+.animate-progress {
+  background: linear-gradient(90deg, #38B2AC, #4299E1);
+  background-size: 200% 100%;
+  animation: progressAnimation 2s linear infinite;
+}
+
+.animate-progress-border {
+  background: linear-gradient(90deg, #38B2AC, #4299E1, white);
+  background-size: 200% 100%;
+  animation: progressBorderAnimation 2s linear infinite;
+}
+
+
+@font-face {
+  font-family: 'Genty Demo';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Genty Demo'), url('https://fonts.cdnfonts.com/s/59891/GentyDemo-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Evermore';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Evermore'), url('https://fonts.cdnfonts.com/s/96082/Evermore-WyDmO.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Exorcist';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Exorcist'), url('/public/fonts/Exorcist.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Smack';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Smack'), url('/public/fonts/NotoSans-Bold.ttf') format('woff');
+}
+
+@font-face {
+  font-family:'Mansalva';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Mansalva'), url('/public/fonts/Gudea-Regular.ttf') format('woff');
+}
+
+@font-face {
+  font-family: 'Might';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Might'), url('/public/fonts/NotoSans-Bold.ttf') format('woff');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media(max-width: 800px) {
+  .pc-menu {
+    display: none !important;
+  }
+
+  .sp-menu {
+    display: block !important;
+  }
+}
+
+@media(max-width: 1130px) {
+  .multi-link {
+    justify-content: space-around !important;
+  }
+
+  .main-visual {
+    flex-direction: column !important;
+  }
+
+  .main-visual>div:first-of-type {
+    justify-content: center;
+  }
+}
+
+@media(min-width: 768px) and (max-width: 888px) {
+  #roadmap h1 {
+    font-size: 50px;
+  }
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 5px;
+  opacity: 0.01;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(27,27,27);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

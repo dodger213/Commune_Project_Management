@@ -1,0 +1,35 @@
+
+.ant-modal-content {
+    background-color: #328336 !important;
+    padding: 0px !important;
+  }
+ .ant-dropdown-menu{
+    background:none !important;
+ }  
+#antd{
+    opacity: 0;
+    background-color: #328336 !important;
+  }
+.ant-collapse-header-text{
+    color: white;
+}
+.ant-collapse-header{
+    background-color: #328336 !important;
+    /* border: 1px solid  #328336 !important; */
+    border: none !important;
+    height: 70px;
+
+}
+.ant-collapse{
+    border: none !important;
+}
+.ant-collapse-item{
+    border: none !important;
+}
+.ant-collapse :first-child .ant-collapse-header {
+    border-radius:8px 8px 0 0;
+}
+.ant-collapse-expand-icon span{
+    margin-top: 14px !important;
+    color: white !important;
+}
