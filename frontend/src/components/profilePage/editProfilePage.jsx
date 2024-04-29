@@ -143,7 +143,7 @@ const EditProfilePage = () => {
                                                 >
                                                     {(() => {
                                                         if (!connected) {
-                                                            navigate('/');
+                                                            // navigate('/');
                                                             return (
                                                                 <div className=" flex gap-[4px] justify-center items-center">
                                                                     unconnected
