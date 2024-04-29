@@ -35,7 +35,7 @@ function ProfilePage() {
     }, [dispatch, isLoadingPost,user]);
 
     return (
-        <div className="w-full h-screen overflow-y-hidden dark:bg-[rgb(18,18,18)] bg-[#eee]">
+        <div className="w-full overflow-y-hidden md:h-screen dark:bg-[rgb(18,18,18)] bg-[#eee]">
             <Header />
             <div className=' mt-[120px] w-full'>
                 <div className=' z-10 ml-auto'>

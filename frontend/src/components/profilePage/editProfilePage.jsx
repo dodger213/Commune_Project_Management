@@ -53,7 +53,7 @@ const EditProfilePage = () => {
     };
 
     return (
-        <div className="w-full overflow-y-hidden h-screen dark:bg-[rgb(18,18,18)]" >
+        <div className="w-full overflow-y-hidden md:h-screen dark:bg-[rgb(18,18,18)]" >
             <Header />
             <div className=' flex w-full justify-center items-center mt-[120px] mb-[60px]'>
                 <div className='flex justify-center items-start w-[100%] overflow-y-visible flex-col px-[10px] sm:px-[100px]' style={{ fontFamily: 'Smack' }}>
