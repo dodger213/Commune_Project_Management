@@ -57,3 +57,7 @@
   font-weight: 600;
   /* src: local('Evermore'), url('https://fonts.cdnfonts.com/s/96082/Evermore-WyDmO.woff') format('woff'); */
 }
+
+p {
+  margin-bottom: 0 !important;
+}

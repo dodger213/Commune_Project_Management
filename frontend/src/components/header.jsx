@@ -70,6 +70,9 @@ const Header = () => {
   const openProfilePage = () => {
     navigate("/profile");
   };
+  const openEditProfilePage = () => {
+    navigate("/profile/edit");
+  };
 
   return (
     <div className=" fixed w-full z-[99] bg-[#ffffff] dark:bg-[rgb(18,18,18)] transition-all py-1 sm:py-2 md:py-3 flex items-center justify-between shadow-md dark:shadow-none ">
@@ -95,17 +98,63 @@ const Header = () => {
             </button>
           </div> */}
           <div className=" flex gap-[7px] justify-center items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-7 w-7 text-[#256fc4] dark:text-[white]">
-              <path fillRule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clipRule="evenodd" />
-            </svg>
+
             {/* {
                               user && user.user.avatarFile ? 
                               <img className="w-8 h-8" src={user.user.avatarFile} alt="" />
                               : <img className="w-8 h-8 rounded-[50%]" src="./images/12.png" alt="" />
                             } */}
-            <button onClick={openProfilePage} className='dark:text-white text-[#256fc4] text-[18px] sm:text-base md:text-[18px] transition-all evermore hover:opacity-[0.7] no-underline rounded-full dark:hover:text-white hover:text-blue-800' style={{ fontFamily: 'Smack' }}>
+            {/* <button onClick={openProfilePage} className='dark:text-white text-[#256fc4] text-[18px] sm:text-base md:text-[18px] transition-all evermore hover:opacity-[0.7] no-underline rounded-full dark:hover:text-white hover:text-blue-800' style={{ fontFamily: 'Smack' }}>
               Profile
-            </button>
+            </button> */}
+            <Menu as="div" className="relative inline-block text-left z-[99]">
+              <div className="mt-[5px]">
+                <Menu.Button className="inline-flex w-full justify-center rounded-[50px] text-sm font-semibold text-gray-900 dark:text-[white] shadow-sm ring-1 ring-inset ring-gray-300">
+                  <div
+                    id="mobile-menu-button"
+                    className="p-1 dark:text-white focus:outline-none"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-12 w-12 text-[#256fc4] dark:text-[white]">
+                      <path fillRule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </Menu.Button>
+              </div>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute z-50 mt-4 right-0 w-[185px] origin-top-right divide-y divide-gray-100 dark:divide-[rgb(18,18,18)] rounded-md bg-[#ffffff] dark:bg-[rgb(27,27,27)] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="p-[25px] flex flex-col justify-start items-start gap-[20px]">
+                    <Menu.Item>
+                      <div className=' flex justify-center items-center gap-[15px]'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-7 w-7 text-[#256fc4] dark:text-[white]">
+                          <path fillRule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clipRule="evenodd" />
+                        </svg>
+                        <span onClick={openProfilePage} className=" text-[#256fc4] cursor-pointer dark:text-white" style={{ fontFamily: 'Smack' }}>
+                          My Profile
+                        </span>
+                      </div>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <div
+                        className="flex items-center justify-center gap-[15px]"
+                      >
+                        <svg class="feather feather-edit" fill="none" className="h-7 w-7 dark:text-[white] text-[#256fc4]" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                        <span onClick={openEditProfilePage} className=" text-[#256fc4] dark:text-white cursor-pointer" style={{ fontFamily: 'Smack' }}>
+                          Edit Profile
+                        </span>
+                      </div>
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
           </div>
           <div
             style={{ display: "flex", gap: 12 }}

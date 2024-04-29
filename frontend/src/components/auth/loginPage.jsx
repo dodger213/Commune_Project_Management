@@ -20,7 +20,7 @@ function LoginPage() {
                             <div className="w-[100%] md:max-w-[50%] mt-[-100px]" style={{ fontFamily: 'Smack' }} >
                                 <section className="bg-[#fff] dark:bg-[rgb(18,18,18)]">
                                     <div className="flex flex-col mt-[100px] items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                                        <div className="w-full bg-[#fff] md:ml-[150px] ml-[0px] rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                                        <div className="w-full bg-[#fff] md:ml-[150px] ml-[0px] rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 dark:bg-[rgb(33,33,33)]">
                                             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                                                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                                     Sign in to your account
@@ -28,11 +28,11 @@ function LoginPage() {
                                                 <form className="space-y-4 md:space-y-6" action="#">
                                                     <div>
                                                         <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 outline-none text-gray-900 sm:text-sm rounded-lg focus:border-[#256fc4] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-[#fff] dark:focus:ring-blue-500 dark:focus:border-blue-500 emailInput" placeholder="name@comdev.com" required="" />
+                                                        <input type="email" name="email" id="email" className="bg-gray-50 border-[1px] border-[rgb(209,213,219)] outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-[rgb(33,33,33)] dark:placeholder-gray-400 dark:text-[#fff] focus:ring-blue-500 focus:border-blue-500 dark:focus:border-[#4f4f4f] dark:border-[#303030] emailInput" placeholder="name@comdev.com" required="" />
                                                     </div>
                                                     <div>
                                                         <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                                        <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#256fc4] focus:border-[#256fc4] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                                        <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 outline-none border-[1px] border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-[rgb(33,33,33)] dark:placeholder-gray-400 dark:text-white focus:ring-blue-500 focus:border-blue-500 dark:focus:border-[#4f4f4f] dark:border-[#303030]" required="" />
                                                     </div>
                                                     <div className="flex items-center justify-between">
                                                         <div className="flex items-start">
