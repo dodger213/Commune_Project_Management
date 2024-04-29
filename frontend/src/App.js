@@ -7,6 +7,8 @@ import FrontPage from "./components/frontPage";
 import Dashboard from "./components/dashboard";
 import ProfilePage from "./components/profilePage";
 import EditProfilePage from "./components/profilePage/editProfilePage"
+import LoginPage from "./components/auth/loginPage";
+import SignupPage from "./components/auth/signupPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import {
@@ -113,6 +115,8 @@ const App = () => {
                 <Route path="/" element={<FrontPage />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="profile" element={<ProfilePage />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="signup" element={<SignupPage />} />
                 <Route path="profile/edit" element={<EditProfilePage />} />
               </Route>
             </Routes>
