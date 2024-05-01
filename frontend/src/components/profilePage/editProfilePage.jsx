@@ -3,6 +3,7 @@ import Header from '../header'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser, getUser } from "../../redux/actions/usersAction";
+
 const EditProfilePage = () => {
     const dispatch = useDispatch();
     const { useState } = React;

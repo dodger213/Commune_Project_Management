@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import 'simplebar-react/dist/simplebar.min.css';
 
 body {
   margin: 0;
@@ -16,6 +17,7 @@ body {
 		'Segoe UI Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #eee !important;
 }
 
 code {
@@ -183,4 +185,24 @@ code {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.project_dropdown ul{
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
+}
+.project_dropdown {
+  gap: 0 !important;
+  box-shadow: none;
+  border-radius: 30px;
+  border: none !important;
+  border: 0px !important;
+}
+
+.dropdown svg{
+   color: #328336;
+}
+
+p {
+  margin-bottom: 0 !important;
 }
