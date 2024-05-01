@@ -14,7 +14,7 @@ export function Projects() {
     const [pm, setPm] = useState('Potter');
     const [dev, setDev] = useState('potter');
     const [title, setTitle] = useState('Com Tensor');
-    const [description, setDescription] = useState('Commune bittenor project');
+    const [description, setDescription] = useState('Commune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor projectCommune bittenor <br> projectCommune bittenor projectCommune bittenor projectCommune bittenor project');
     const [avatarFile, setAvatarFile] = useState("./images/commune.gif");
     const [status, setStatus] = useState("Created");
     const [site, setSite] = useState("commune.org");
@@ -35,9 +35,11 @@ export function Projects() {
     }, [dispatch, isLoadingPost, user]);
     const [openDetailModal, setOpenDetailModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
+    const [openDescriptionModal, setOpenDescriptionModal] = useState(false);
 
     const handleDetail = () => setOpenDetailModal(true);
     const handleEdit = () => setOpenEditModal(true);
+    const handleDescription = () => setOpenDescriptionModal(true);
 
     const handleDetailCancel = () => {
         setOpenDetailModal(false);
@@ -45,6 +47,10 @@ export function Projects() {
 
     const handleEditCancel = () => {
         setOpenEditModal(false);
+    };
+
+    const handleDescriptionCancel = () => {
+        setOpenDescriptionModal(false);
     };
 
     const saveProject = () => {
@@ -66,84 +72,86 @@ export function Projects() {
     };
 
     return (
-        <Card className=" project_dropdown w-[80%] border-[1px] shadow-sm dark:bg-[rgb(36,36,36)] bg-[#fff] border-none" style={{ fontFamily: 'Smack', gap: "0", border: "none" }}>
-            <div className="flex justify-end pt-1 pl-0 dropdown" style={{ paddingLeft: "0" }}>
-                <Dropdown inline label="" className=" pl-0" style={{ paddingLeft: "0" }}>
-                    <Dropdown.Item onClick={handleDetail}>
-                        <div
-                            className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            More Detail
+        <div className="w-full flex justify-center items-center" style={{ fontFamily: 'Smack' }}>
+            <Card className=" project_dropdown w-[80%] border-[1px] shadow-sm dark:bg-[rgb(36,36,36)] bg-[#fff] border-none" style={{ fontFamily: 'Smack', gap: "0", border: "none" }}>
+                <div className="flex justify-end pt-1 pl-0 dropdown" style={{ paddingLeft: "0" }}>
+                    <Dropdown inline label="" className=" pl-0" style={{ paddingLeft: "0" }}>
+                        <Dropdown.Item onClick={handleDetail}>
+                            <div
+                                className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                                More Detail
+                            </div>
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={handleEdit}>
+                            <div
+                                className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                                Edit
+                            </div>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <div
+                                className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                                Change Dev
+                            </div>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <div
+                                className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                                Apply
+                            </div>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <div
+                                className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                                Delete
+                            </div>
+                        </Dropdown.Item>
+                    </Dropdown>
+                </div>
+                <div className="flex items-center justify-between px-3 gap-[20px] mt-[-20px]">
+                    <div className=" flex items-center justify-center gap-[40px]">
+                        <img
+                            alt=""
+                            height="96"
+                            src={projectImg}
+                            width="96"
+                            className="mb-3 rounded-full shadow-lg"
+                        />
+                        <div>
+                            <h5 className="mb-1 text-xl font-medium text-[rgb(25,118,210)] dark:text-white">ComTensor</h5>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Commune Bittensor project</span>
                         </div>
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={handleEdit}>
-                        <div
-                            className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Edit
+                    </div>
+                    <div className=" flex gap-[20px]">
+                        <div className=" flex gap-[20px] justify-center items-center">
+                            <span className=" w-[10px] h-[10px] rounded-[50%] bg-red-600"></span>
+                            <span className=" text-red-600">
+                                Created
+                            </span>
                         </div>
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                        <div
-                            className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Change Dev
+                        <div className=" flex gap-[20px] justify-center items-center">
+                            <span className=" w-[10px] h-[10px] rounded-[50%] bg-blue-600"></span>
+                            <span className=" text-blue-600">
+                                In Progress
+                            </span>
                         </div>
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                        <div
-                            className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Apply
+                        <div className=" flex gap-[20px] justify-center items-center">
+                            <span className=" w-[10px] h-[10px] rounded-[50%] bg-green-600"></span>
+                            <span className=" text-green-600">
+                                Done
+                            </span>
                         </div>
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                        <div
-                            className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Delete
-                        </div>
-                    </Dropdown.Item>
-                </Dropdown>
-            </div>
-            <div className="flex items-center justify-between px-3 gap-[20px] mt-[-20px]">
-                <div className=" flex items-center justify-center gap-[40px]">
-                    <img
-                        alt=""
-                        height="96"
-                        src={projectImg}
-                        width="96"
-                        className="mb-3 rounded-full shadow-lg"
-                    />
-                    <div>
-                        <h5 className="mb-1 text-xl font-medium text-[rgb(25,118,210)] dark:text-white">ComTensor</h5>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">Commune Bittensor project</span>
+                    </div>
+                    <div className=" text-blue-500 text-[20px] ml-[50px]">
+                        <span className=" text-red-600">Potter</span> is handling
                     </div>
                 </div>
-                <div className=" flex gap-[20px]">
-                    <div className=" flex gap-[20px] justify-center items-center">
-                        <span className=" w-[10px] h-[10px] rounded-[50%] bg-red-600"></span>
-                        <span className=" text-red-600">
-                            Created
-                        </span>
-                    </div>
-                    <div className=" flex gap-[20px] justify-center items-center">
-                        <span className=" w-[10px] h-[10px] rounded-[50%] bg-blue-600"></span>
-                        <span className=" text-blue-600">
-                            In Progress
-                        </span>
-                    </div>
-                    <div className=" flex gap-[20px] justify-center items-center">
-                        <span className=" w-[10px] h-[10px] rounded-[50%] bg-green-600"></span>
-                        <span className=" text-green-600">
-                            Done
-                        </span>
-                    </div>
-                </div>
-                <div className=" text-blue-500 text-[20px] ml-[50px]">
-                    <span className=" text-red-600">Potter</span> is handling
-                </div>
-            </div>
+            </Card>
             {openDetailModal ?
                 <Flip right>
                     <div className='fixed w-[600px] h-auto flex justify-start items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
@@ -174,8 +182,18 @@ export function Projects() {
                                     {status}
                                 </span>
                             </div>
-                            <div className="w-full justify-center items-center text-center mt-[20px] text-[17px] text-gray-600 dark:text-gray-300">
-                                {description}
+                            <div className="w-full justify-center items-center text-center mt-[20px] ">
+                                {/* {description} */}
+                                <div className=' w-full flex justify-center mr-[320px]'>
+                                    <button
+                                        className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-[12px] px-6 rounded-lg bg-gray-900 dark:bg-[rgb(18,18,18)] text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                                        type="button"
+                                        data-ripple-light="true"
+                                        style={{ fontFamily: "Smack" }}
+                                        onClick={handleDescription}
+                                    >
+                                        Description</button>
+                                </div>
                             </div>
                             <div className="flex flex-col justify-center items-center mb-[50px]" style={{ fontFamily: 'Smack' }}>
                                 <div className="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-clip-border shadow-3xl shadow-shadow-500 dark:text-white dark:!shadow-none p-3">
@@ -301,6 +319,22 @@ export function Projects() {
                     </div>
                 </Flip>
                 : <></>}
-        </Card>
+            {openDescriptionModal ?
+                <Flip right>
+                    <div className='fixed w-[1000px] h-auto flex justify-start items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
+                        <div className='flex justify-center items-start w-[100%] p-[50px] overflow-y-visible flex-col px-[10px] sm:px-[100px]' style={{ fontFamily: 'Smack' }}>
+                            {/* <div className=' flex justify-center items-center  md:justify-start md:items-start text-[rgb(18,18,18)] w-full dark:text-white text-[30px] mt-[30px] lg:mt-[-30px]'>Profile details</div> */}
+                            <div className=' fixed top-[30px] right-[30px] cursor-pointer z-[99]' onClick={handleDescriptionCancel}>
+                                <img src={closeIcon} className=' w-[30px]' alt="" />
+                            </div>
+                            <div className="text-[17px] text-gray-600 dark:text-gray-300 ">
+                                {description}
+                            </div>
+                        </div>
+                    </div>
+                </Flip>
+                : <></>}
+        </div>
+
     );
 }
