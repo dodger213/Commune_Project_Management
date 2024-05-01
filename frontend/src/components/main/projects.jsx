@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, createUser } from "../../redux/actions/usersAction";
 import closeIcon from "../../assets/211652_close_icon.svg"
-import { Flip } from 'react-reveal';
+import { Zoom } from 'react-reveal';
 
 export function Projects() {
 
@@ -153,7 +153,7 @@ export function Projects() {
                 </div>
             </Card>
             {openDetailModal ?
-                <Flip right>
+                <Zoom>
                     <div className='fixed w-[600px] h-auto flex justify-start items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
                         <div className=' w-full h-full'>
                             <div className=' fixed top-[30px] right-[30px] cursor-pointer z-[99]' onClick={handleDetailCancel}>
@@ -231,10 +231,10 @@ export function Projects() {
                             </div>
                         </div>
                     </div>
-                </Flip>
+                </Zoom>
                 : <></>}
             {openEditModal ?
-                <Flip right>
+                <Zoom>
                     <div className='fixed w-[1000px] h-auto flex justify-start items-center top-[30px] z-[120] bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
 
                         <div className='flex justify-center items-start w-[100%] overflow-y-visible flex-col px-[10px] sm:px-[100px]' style={{ fontFamily: 'Smack' }}>
@@ -317,10 +317,10 @@ export function Projects() {
                             </div>
                         </div>
                     </div>
-                </Flip>
+                </Zoom>
                 : <></>}
             {openDescriptionModal ?
-                <Flip right>
+                <Zoom>
                     <div className='fixed w-[1000px] h-auto flex justify-start items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
                         <div className='flex justify-center items-start w-[100%] p-[50px] overflow-y-visible flex-col px-[10px] sm:px-[100px]' style={{ fontFamily: 'Smack' }}>
                             {/* <div className=' flex justify-center items-center  md:justify-start md:items-start text-[rgb(18,18,18)] w-full dark:text-white text-[30px] mt-[30px] lg:mt-[-30px]'>Profile details</div> */}
@@ -332,7 +332,7 @@ export function Projects() {
                             </div>
                         </div>
                     </div>
-                </Flip>
+                </Zoom>
                 : <></>}
         </div>
 

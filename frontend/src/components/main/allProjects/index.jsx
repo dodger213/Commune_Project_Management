@@ -2,7 +2,7 @@ import React from 'react'
 import { Projects } from '../projects'
 import { useEffect, useState } from 'react';
 import closeIcon from "../../../assets/211652_close_icon.svg"
-import { Flip } from 'react-reveal';
+import { Zoom   } from 'react-reveal';
 
 export default function AllProjects() {
 
@@ -75,7 +75,7 @@ export default function AllProjects() {
             <Projects />
             <Projects />
             {openNewModal ?
-                <Flip right>
+                <Zoom>
                     <div className='fixed w-[1000px] h-auto flex justify-start items-center top-[30px] z-[111] bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
 
                         <div className='flex justify-center items-start w-[100%] overflow-y-visible flex-col px-[10px] sm:px-[100px]' style={{ fontFamily: 'Smack' }}>
@@ -155,10 +155,10 @@ export default function AllProjects() {
                             </div>
                         </div>
                     </div>
-                </Flip>
+                </Zoom>
                 : <></>}
             {openNewIdeaModal ?
-                <Flip right>
+                <Zoom>
                     <div className='fixed w-[1000px] h-auto flex justify-start items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
 
                         <div className='flex justify-center items-start w-[100%] overflow-y-visible flex-col px-[10px] sm:px-[100px]' style={{ fontFamily: 'Smack' }}>
@@ -230,7 +230,7 @@ export default function AllProjects() {
                             </div>
                         </div>
                     </div>
-                </Flip>
+                </Zoom>
                 : <></>}
         </div>
     )

@@ -15,7 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import closeIcon from "../../../assets/211652_close_icon.svg"
 import Label from '../components/label';
 import Iconify from '../components/iconify';
-import { Flip } from 'react-reveal';
+import { Zoom } from 'react-reveal';
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
@@ -130,7 +130,7 @@ export default function UserTableRow({
       </Popover>
 
       {openModal ?
-        <Flip right>
+        <Zoom>
           <div className='fixed w-[600px] h-[800px] flex justify-start items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
             <div className=' w-full'>
               <div className=' fixed top-[30px] right-[30px] cursor-pointer z-[99]' onClick={handleCancel}>
@@ -215,7 +215,7 @@ export default function UserTableRow({
               </div>
             </div>
           </div>
-        </Flip>
+        </Zoom>
         : <></>}
 
     </>
