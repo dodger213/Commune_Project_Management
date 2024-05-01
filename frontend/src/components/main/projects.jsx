@@ -235,7 +235,7 @@ export function Projects() {
                 : <></>}
             {openEditModal ?
                 <Flip right>
-                    <div className='fixed w-[1000px] h-auto flex justify-start items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
+                    <div className='fixed w-[1000px] h-auto flex justify-start items-center top-[30px] z-[120] bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
 
                         <div className='flex justify-center items-start w-[100%] overflow-y-visible flex-col px-[10px] sm:px-[100px]' style={{ fontFamily: 'Smack' }}>
                             {/* <div className=' flex justify-center items-center  md:justify-start md:items-start text-[rgb(18,18,18)] w-full dark:text-white text-[30px] mt-[30px] lg:mt-[-30px]'>Profile details</div> */}
@@ -304,7 +304,7 @@ export function Projects() {
                             </div>
                             <div className='flex justify-start w-full items-start flex-col mt-[40px]'>
                                 <label className="block w-full text-[17px] font-medium mb-2 dark:text-white text-start">Description</label>
-                                <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="py-2 px-3 block w-[800px] h-[100px] border-[1px] font-thin border-solid outline-none border-gray-300 rounded-lg text-[17px] focus:border-gray-500 dark:focus:border-[#4f4f4f] disabled:opacity-50 disabled:pointer-events-none bg-none dark:bg-[rgb(18,18,18)] dark:border-[#303030] dark:text-gray-200 dark:placeholder:text-[#a7a7a7]" placeholder="Description..." />
+                                <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="py-2 px-3 block w-[800px] h-[150px] border-[1px] font-thin border-solid outline-none border-gray-300 rounded-lg text-[14px] focus:border-gray-500 dark:focus:border-[#4f4f4f] disabled:opacity-50 disabled:pointer-events-none bg-none dark:bg-[rgb(18,18,18)] dark:border-[#303030] dark:text-gray-200 dark:placeholder:text-[#a7a7a7]" placeholder="Description..." />
                             </div>
                             <div className=' flex justify-center items-center w-full mt-[50px] mb-[40px]'>
                                 <div onClick={saveProject} style={{ fontFamily: 'Might', width: '200px', fontSize: '18px', transition: '0.1s' }} className="relative rounded-[15px]  cursor-pointer group font-medium no-underline flex p-2 text-white items-center justify-center content-center focus:outline-none">
