@@ -12,7 +12,7 @@ function Main() {
           <Alerts />
         </div>
       </Flip>
-      <Devs />
+      <AllProjects />
     </div>
   )
 }

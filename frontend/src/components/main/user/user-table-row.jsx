@@ -131,7 +131,7 @@ export default function UserTableRow({
 
       {openModal ?
         <Flip right>
-          <div className='fixed w-[600px] h-[800px] flex justify-start items-center top-[100px] z-50 bg-[#fff] dark:bg-[rgb(36,36,36)] shadow-md'>
+          <div className='fixed w-[600px] h-[800px] flex justify-start items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
             <div className=' w-full'>
               <div className=' fixed top-[30px] right-[30px] cursor-pointer z-[99]' onClick={handleCancel}>
                 <img src={closeIcon} className=' w-[30px]' alt="" />

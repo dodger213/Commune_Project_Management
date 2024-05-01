@@ -17,7 +17,7 @@ body {
 		'Segoe UI Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eee !important;
+  background-color: rgb(249,250,251) !important;
 }
 
 code {
