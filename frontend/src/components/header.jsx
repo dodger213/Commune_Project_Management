@@ -85,7 +85,7 @@ const Header = () => {
               className="cursor-pointer sm:h-[70px] h-[50px]"
             />
           </a>
-          <a href='/' className=' no-underline dark:text-white transition-all'><p className=' cursor-pointer text-[24px] font-bold mt-[7px]'>Commune</p></a>
+          <a href='/' className=' no-underline dark:text-white transition-all'><p className=' cursor-pointer text-[24px] font-bold mt-[7px]'>Commune Management</p></a>
         </div>
         <nav className="flex-wrap gap-3 items-center hidden space-x-4 pc-menu md:flex">
           <div className=''>

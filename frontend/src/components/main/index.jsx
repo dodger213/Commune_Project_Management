@@ -6,21 +6,16 @@ import NewProjectRequest from './newProjectRequest'
 import Pms from './pms'
 import Devs from './devs'
 import { Alerts } from '../notification'
-import { Flip } from "react-reveal";
 
 function Main() {
   return (
     <div className='w-full'>
-      <Flip right>
-        <div className='fixed mt-[30px] right-[50px]'>
-          <Alerts />
-        </div>
-      </Flip>
+      <Alerts />
       <Devs />
-      <Pms/>
-      <MyProjects/>
+      <Pms />
+      <MyProjects />
       <AllProjects />
-      <NewProjectRequest/>
+      <NewProjectRequest />
     </div>
   )
 }

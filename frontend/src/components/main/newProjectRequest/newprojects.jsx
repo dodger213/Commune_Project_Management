@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser, createUser } from "../../../redux/actions/usersAction";
 import { Zoom } from 'react-reveal';
 import { XCircleIcon } from "@heroicons/react/24/solid";
+// import Karnbarn from "../karnbarn";
 
 export function NewProjects() {
 
@@ -41,10 +42,13 @@ export function NewProjects() {
         setOpenDetailModal(false);
     };
 
+    // const [openTicket, setOpenTicket] = useState(false);
+    // const handleTicket = () => setOpenTicket(!openTicket);
+
     return (
-        <div className="w-full flex justify-center items-center" style={{ fontFamily: 'Smack' }}>
-            <Card className=" project_dropdown w-[80%] border-[1px] shadow-sm dark:bg-[rgb(36,36,36)] bg-[#fff] border-none" style={{ fontFamily: 'Smack', gap: "0", border: "none" }}>
-                <div className="flex justify-end pt-1 pl-0 dropdown" style={{ paddingLeft: "0" }}>
+        <div className="w-full flex justify-center items-center" >
+            <Card className=" project_dropdown w-[90%] border-[1px] shadow-sm dark:bg-[rgb(36,36,36)] bg-[#fff] border-none" style={{ gap: "0", border: "none" }}>
+                <div className="flex justify-end pt-1 pl-0 dropdown" style={{ paddingLeft: "0",fontFamily: 'Smack' }}>
                     <Dropdown inline label="" className=" pl-0" style={{ paddingLeft: "0" }}>
                         <Dropdown.Item onClick={handleDetail}>
                             <div
@@ -69,7 +73,7 @@ export function NewProjects() {
                         </Dropdown.Item>
                     </Dropdown>
                 </div>
-                <div className="flex items-center justify-between px-3 gap-[20px] mt-[-20px]">
+                <div className="flex items-center justify-between px-3 gap-[20px] cursor-pointer mt-[-20px]" style={{ fontFamily: 'Smack' }}>
                     <div className=" flex items-center justify-center gap-[40px]">
                         <img
                             alt=""
@@ -87,6 +91,8 @@ export function NewProjects() {
                         <span className=" text-red-600">Potter</span> is Suggesting
                     </div>
                 </div>
+                {/* {openTicket ? <Karnbarn /> : <></>} */}
+
             </Card>
             {openDetailModal ?
                 <div className='fixed top-[0px] left-0 w-screen h-screen flex justify-center items-center z-[99]'>

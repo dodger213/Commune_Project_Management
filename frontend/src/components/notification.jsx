@@ -1,5 +1,6 @@
 import { Alert } from "@material-tailwind/react";
- 
+import { Flip } from "react-reveal";
+
 function Icon() {
   return (
     <svg
@@ -16,14 +17,19 @@ function Icon() {
     </svg>
   );
 }
- 
+
 export function Alerts() {
   return (
-    <Alert
-      icon={<Icon />}
-      className="rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946]"
-    >
-      A simple alert for showing message.
-    </Alert>
+    <Flip right>
+      <div className='fixed z-[199] mt-[30px] right-[50px]'>
+        <Alert
+          icon={<Icon />}
+          className="rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946]"
+        >
+          A simple alert for showing message.
+        </Alert>
+      </div>
+    </Flip>
+
   );
 }
