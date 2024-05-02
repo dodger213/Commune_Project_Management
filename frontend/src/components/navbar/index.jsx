@@ -14,7 +14,8 @@ import {
   CheckBadgeIcon,
   CurrencyDollarIcon,
   CodeBracketIcon,
-  RocketLaunchIcon    
+  RocketLaunchIcon,
+  DocumentPlusIcon    
 } from "@heroicons/react/24/solid";
 
 function Nav() {
@@ -52,6 +53,12 @@ function Nav() {
               <CurrencyDollarIcon className="h-6 w-6 text-gray-400" />
             </ListItemPrefix>
             <span className='ml-[20px] text-[rgb(134,146,157)] dark:text-gray-300'> Bounty Request</span>
+          </ListItem>
+          <ListItem className='hover:bg-gray-200 dark:hover:bg-[rgb(36,36,36)]'>
+            <ListItemPrefix>
+              <DocumentPlusIcon className="h-6 w-6 text-gray-400" />
+            </ListItemPrefix>
+            <span className='ml-[20px] text-[rgb(134,146,157)] dark:text-gray-300'> New Project Request</span>
           </ListItem>
           <ListItem className='hover:bg-gray-200 dark:hover:bg-[rgb(36,36,36)]'>
             <ListItemPrefix>

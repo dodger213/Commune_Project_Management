@@ -1,12 +1,12 @@
 import { Card, Dropdown } from "flowbite-react";
-import projectImg from "../../assets/commune.gif"
+import projectImg from "../../../assets/commune.gif"
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, createUser } from "../../redux/actions/usersAction";
+import { getUser, createUser } from "../../../redux/actions/usersAction";
 import { Zoom } from 'react-reveal';
 import { XCircleIcon } from "@heroicons/react/24/solid";
 
-export function Projects() {
+export function MyProjects() {
 
     const dispatch = useDispatch();
     const { isLoading, user, isLoadingPost } = useSelector((state) => state.users);
@@ -86,23 +86,9 @@ export function Projects() {
                         </Dropdown.Item>
                         <Dropdown.Item>
                             <div
-                                className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Change Dev
-                            </div>
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            <div
-                                className="block px-4 py-2 text-sm text-black hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Apply
-                            </div>
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            <div
                                 className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                             >
-                                Delete
+                                Quit
                             </div>
                         </Dropdown.Item>
                     </Dropdown>
@@ -123,12 +109,6 @@ export function Projects() {
                     </div>
                     <div className=" flex gap-[20px]">
                         <div className=" flex gap-[20px] justify-center items-center">
-                            <span className=" w-[10px] h-[10px] rounded-[50%] bg-red-600"></span>
-                            <span className=" text-red-600">
-                                Created
-                            </span>
-                        </div>
-                        <div className=" flex gap-[20px] justify-center items-center">
                             <span className=" w-[10px] h-[10px] rounded-[50%] bg-blue-600"></span>
                             <span className=" text-blue-600">
                                 In Progress
@@ -142,7 +122,7 @@ export function Projects() {
                         </div>
                     </div>
                     <div className=" text-blue-500 text-[20px] ml-[50px]">
-                        <span className=" text-red-600">Potter</span> is handling
+                        <span className=" text-red-600">Potter</span> is reviewing
                     </div>
                 </div>
             </Card>
@@ -266,10 +246,6 @@ export function Projects() {
                                             <label className="block w-full text-[17px] font-medium mb-2 dark:text-white text-start">Title</label>
                                             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="py-2 px-3 block w-[350px] border-[1px] font-thin border-solid outline-none border-gray-300 rounded-lg text-[17px] focus:border-gray-500 dark:focus:border-[#4f4f4f] disabled:opacity-50 disabled:pointer-events-none bg-none dark:bg-[rgb(18,18,18)] dark:border-[#303030] dark:text-gray-200 dark:placeholder:text-[#a7a7a7]" placeholder="Enter Title" />
                                         </div>
-                                        <div className='flex justify-center items-start w-full flex-col mt-[40px]'>
-                                            <label className="block w-full text-[17px] font-medium mb-2 dark:text-white text-start">Developer</label>
-                                            <input type="text" value={dev} onChange={(e) => setDev(e.target.value)} className="py-2 px-3 block w-[350px] border-[1px] font-thin border-solid outline-none border-gray-300 rounded-lg text-[17px] focus:border-gray-500 dark:focus:border-[#4f4f4f] disabled:opacity-50 disabled:pointer-events-none bg-none dark:bg-[rgb(18,18,18)] dark:border-[#303030] dark:text-gray-200 dark:placeholder:text-[#a7a7a7]" placeholder="Developer..." />
-                                        </div>
                                         <div className='flex justify-start w-full items-start flex-col mt-[40px]'>
                                             <label className="block w-full text-[17px] font-medium mb-2 dark:text-white text-start">Website Link</label>
                                             <input type="text" value={site} onChange={(e) => setSite(e.target.value)} className="py-2 px-3 block w-[350px] border-[1px] font-thin border-solid outline-none border-gray-300 rounded-lg text-[17px] focus:border-gray-500 dark:focus:border-[#4f4f4f] disabled:opacity-50 disabled:pointer-events-none bg-none dark:bg-[rgb(18,18,18)] dark:border-[#303030] dark:text-gray-200 dark:placeholder:text-[#a7a7a7]" placeholder="Website Link..." />
@@ -283,10 +259,6 @@ export function Projects() {
                                                 <option value="In Progress" className=" text-blue-600">In Progress</option>
                                                 <option value="Done" className=" text-green-600">Done</option>
                                             </select>
-                                        </div>
-                                        <div className='flex justify-center items-start w-full flex-col mt-[40px]'>
-                                            <label className="block w-full text-[17px] font-medium mb-2 dark:text-white text-start">Project Manager</label>
-                                            <input type="text" value={pm} onChange={(e) => setPm(e.target.value)} className="py-2 px-3 block w-[350px] border-[1px] font-thin border-solid outline-none border-gray-300 rounded-lg text-[17px] focus:border-gray-500 dark:focus:border-[#4f4f4f] disabled:opacity-50 disabled:pointer-events-none bg-none dark:bg-[rgb(18,18,18)] dark:border-[#303030] dark:text-gray-200 dark:placeholder:text-[#a7a7a7]" placeholder="Enter Project Manager" />
                                         </div>
                                         <div className='flex justify-start w-full items-start flex-col mt-[40px]'>
                                             <label className="block w-full text-[17px] font-medium mb-2 dark:text-white text-start">Git Repo</label>

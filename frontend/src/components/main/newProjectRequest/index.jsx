@@ -1,12 +1,11 @@
 import React from 'react'
-import { UserView } from '../user/view'
+import { NewProjects } from './newprojects'
 
-function Devs() {
+export default function NewProjectRequest() {
     return (
         <div className=' flex flex-col gap-[30px] justify-center items-center mt-[50px] mb-[50px]'>
-            <UserView />
+            <NewProjects/>
+            <NewProjects/>
         </div>
     )
 }
-
-export default Devs
