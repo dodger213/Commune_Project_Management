@@ -33,9 +33,7 @@ manage projects of CommuneAI**
 
 **Admin can see all users who signed up on the sidebar and can give them a role so that users can login and start work**
 
-<video width="600" height="300" controls>
-  <source src="./images/giving-users-role.mp4" type="video/mp4">
-</video>
+https://github.com/potter1990po/Com-management/assets/154459049/942e7774-479e-4966-ab14-323140bfbff6
 
 
 ## Usage
@@ -55,15 +53,11 @@ manage projects of CommuneAI**
     - **You can also manage tickets. If you recieve bounty request tickets, you can check them and have to move them to the complete step.**
     - **You can control the roles of the users. You can give developer or project manager role to the users and also can remove it**
 
-
-<video width="600" height="300" controls>
-  <source src="./images/tickets.mp4" type="video/mp4">
-</video>
+https://github.com/potter1990po/Com-management/assets/154459049/596a5ffa-59a6-45f0-8c2d-ebe9f8f6cd3e
 
 
-<video width="600" height="300" controls>
-  <source src="./images/projects.mp4" type="video/mp4">
-</video>
+https://github.com/potter1990po/Com-management/assets/154459049/3059561f-65e8-4cdc-9345-49c34162cc68
+
 
 
 ## Tickets
@@ -87,10 +81,8 @@ manage projects of CommuneAI**
 
   - **Can see user detail card on hover the user avatar.**
 
+https://github.com/potter1990po/Com-management/assets/154459049/149baf8a-ff9e-45c9-bb66-cfb84971bf05
 
-<video width="600" height="300" controls>
-  <source src="./images/add.mp4" type="video/mp4">
-</video>
 
 
 ## Environment Installation 📝
