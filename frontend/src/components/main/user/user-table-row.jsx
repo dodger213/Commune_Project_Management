@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../../../redux/actions/usersAction';
+import axios from 'axios';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { NotificationManager } from "react-notifications";
+
+
+
 import MenuItem from '@mui/material/MenuItem';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
@@ -15,47 +18,31 @@ import IconButton from '@mui/material/IconButton';
 import Label from '../components/label';
 import Iconify from '../components/iconify';
 import { Zoom } from 'react-reveal';
+import { useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 import { XCircleIcon } from "@heroicons/react/24/solid";
 
 export default function UserTableRow({
-  selected,
-  name,
-  avatarUrl,
-  email,
-  project,
-  tech,
+  fetchUserData,
+  _id,
+  discordName,
+  age,
   role,
-  handleClick,
+  email,
+  avatarUrl,
+  techStack,
+  githubLink,
+  selected,
+  discordId,
+  walletKey,
+  walletNetwork
 }) {
 
-  const dispatch = useDispatch();
-  const { isLoading, user, isLoadingPost } = useSelector((state) => state.users);
 
-  const [age, setAge] = useState('30');
-  const [emal, setEmail] = useState('comdev@gmail.com');
-  const [discordName, setDiscordName] = useState('potter');
-  const [discordId, setDiscordId] = useState('potter2321po.');
   const [avatarFile, setAvatarFile] = useState("./images/12.png");
-  const [walletNet, setWalletNet] = useState("ETH");
-  const [walletKey, setWalletKey] = useState("0x....");
-  const [techStack, setTechStack] = useState("Web3 & AI");
-  const [gitRepo, setGitRepo] = useState("github.com/potter1990po");
+  const [updateRole, setUpdateRole] = useState(role);
+  const { user } = useSelector((state) => state.users);
 
-  useEffect(() => {
-    dispatch(getUser);
-    if (user) {
-      setAvatarFile(user.user.avatarFile)
-      setDiscordName(user.user.discordName)
-      setEmail(user.user.email)
-      setDiscordId(user.user.discordId)
-      setWalletNet(user.user.walletNet)
-      setWalletKey(user.user.walletKey)
-      setTechStack(user.user.techStack)
-      setGitRepo(user.user.gitRepo)
-      setAge(user.user.age)
-    }
-  }, [dispatch, isLoadingPost, user]);
 
   const [open, setOpen] = useState(null);
 
@@ -69,44 +56,81 @@ export default function UserTableRow({
 
   const [openModal, setOpenModal] = useState(false);
 
-  const handleDetail = () => setOpenModal(true);
+  const handleDetail = () => {
+    setOpenModal(true)
+    setOpen(null);
+  };
 
   const handleCancel = () => {
     setOpenModal(false);
   };
-
+  const handleSaveUser = async () => {
+    try {
+      await axios.put(process.env.REACT_APP_API_BASE_URL + "/user/" + _id, { role: updateRole, email, _id });
+      NotificationManager.success('User updated successfully', 'Success')
+      fetchUserData();
+    } catch (e) {
+      NotificationManager.error('Error updating a user', 'Error')
+    }
+  }
+  const handleDeleteUser = async () => {
+    try {
+      await axios.delete(process.env.REACT_APP_API_BASE_URL + "/user/" + _id);
+      NotificationManager.success('User deleted successfully', 'Success')
+      fetchUserData();
+      setOpen(null)
+    } catch (e) {
+      NotificationManager.error('User updated successfully', 'Error')
+    }
+  }
+  const handleRoleChange = (val) => {
+    const already = updateRole.some((aRole => aRole === val))
+    if (already) {
+      const temp = updateRole.filter((aRole => aRole !== val));
+      setUpdateRole(temp);
+      return;
+    } else {
+      setUpdateRole([...updateRole, val]);
+    }
+  }
   return (
     <>
       <TableRow hover tabIndex={-1} project="checkbox" selected={selected}>
         <TableCell padding="checkbox">
-          <Checkbox disableRipple checked={selected} onChange={handleClick} />
         </TableCell>
 
         <TableCell component="th" scope="row" padding="none">
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Avatar alt={name} src={avatarUrl} />
+            <Avatar alt={discordName} src={avatarUrl} />
             <Typography variant="subtitle2" noWrap>
-              {name}
+              {discordName}
             </Typography>
           </Stack>
         </TableCell>
 
         <TableCell>{email}</TableCell>
 
-        <TableCell>{project}</TableCell>
+        <TableCell>{age}</TableCell>
 
-        <TableCell align="center">{tech}</TableCell>
+        <TableCell align="center">{techStack}</TableCell>
 
         <TableCell>
-          <Label color={(role === 'Project Manager' && 'error') || 'success'}>{role}</Label>
+          {role.map((aRole, idx) =>
+            <div className='m-[3px]'>
+              <Label key={idx} color={aRole === 'Developer' ? 'success' : 'error'}>{aRole}</Label>
+            </div>
+          )}
+        </TableCell>
+        <TableCell>
+          {githubLink}
         </TableCell>
 
-        <TableCell align="right">
+        {user?.role.some((aRole) => aRole === 'Administrator') && < TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
             <Iconify icon="eva:more-vertical-fill" />
           </IconButton>
-        </TableCell>
-      </TableRow>
+        </TableCell>}
+      </TableRow >
 
       <Popover
         open={!!open}
@@ -123,104 +147,120 @@ export default function UserTableRow({
           Detail
         </MenuItem>
 
-        <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
+        <MenuItem onClick={handleDeleteUser} sx={{ color: 'error.main' }}>
           <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
           Delete
         </MenuItem>
       </Popover>
 
-      {openModal ?
-        <div className='fixed top-[0px] left-0 w-screen h-screen flex justify-center items-center z-[99]'>
-          <div className=' fixed w-screen h-screen top-0 left-0 bg-[#000] dark:bg-gray-500 opacity-40'>
-          </div>
-          <Zoom duration={500}>
-            <div className='w-[600px] h-[800px] flex justify-start rounded-[30px] items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
-              <div className=' w-full'>
-                <div className=' fixed top-[30px] right-[30px] cursor-pointer z-[100]' onClick={handleCancel}>
-                  <XCircleIcon class="h-10 w-10 text-gray-800 dark:text-white" />
-                </div>
-                <div className=' z-10 ml-auto'>
-                  <div className='justify-center m-auto flex group items-center h-[6rem] w-[6rem] overflow-y-hidden bg-[#e1e1e1] hover:bg-[#cbcbcb] transition-all dark:bg-[rgb(30,30,30)] dark:hover:bg-[rgb(33,33,33)] lg:h-[12rem] lg:w-[12rem] md:h-[9rem] md:w-[9rem] dark:border-[rgb(33,33,33)] border-[#ffffff] border-[5px] rounded-[50%]'>
-                    {avatarFile ?
-                      <span className='w-full h-full flex bg-contain bg-no-repeat bg-center overflow-y-hidden'>
-                        <img className='w-full h-fit' src={avatarFile} alt="" />
-                      </span>
-                      : <span className='w-full h-full'>
-                        {/* <img className=' w-full h-full' src='' alt="" /> */}
-                        <div className=' w-full h-full'>
-                        </div>
-                      </span>
-                    }
+      {
+        openModal ?
+          <div className='fixed top-[0px] left-0 w-screen h-screen flex justify-center items-center z-[99]'>
+            <div className=' fixed w-screen h-screen top-0 left-0 bg-[#000] dark:bg-gray-500 opacity-40'>
+            </div>
+            <Zoom duration={500}>
+              <div className='w-[600px] h-[800px] flex justify-start rounded-[30px] items-center top-[100px] z-50 bg-[#eee] dark:bg-[rgb(36,36,36)] shadow-md'>
+                <div className=' w-full'>
+                  <div className=' fixed top-[30px] right-[30px] cursor-pointer z-[100]' onClick={handleCancel}>
+                    <XCircleIcon class="h-10 w-10 text-gray-800 dark:text-white" />
                   </div>
-                </div>
+                  <div className=' z-10 ml-auto mt-[50px]'>
+                    <div className='justify-center m-auto flex group items-center h-[6rem] w-[6rem] overflow-y-hidden bg-[#e1e1e1] hover:bg-[#cbcbcb] transition-all dark:bg-[rgb(30,30,30)] dark:hover:bg-[rgb(33,33,33)] lg:h-[12rem] lg:w-[12rem] md:h-[9rem] md:w-[9rem] dark:border-[rgb(33,33,33)] border-[#ffffff] border-[5px] rounded-[50%]'>
+                      {avatarFile ?
+                        <span className='w-full h-full flex bg-contain bg-no-repeat bg-center overflow-y-hidden'>
+                          <img className='w-full h-fit' src={avatarFile} alt="" />
+                        </span>
+                        : <span className='w-full h-full'>
+                          {/* <img className=' w-full h-full' src='' alt="" /> */}
+                          <div className=' w-full h-full'>
+                          </div>
+                        </span>
+                      }
+                    </div>
+                  </div>
 
-                <div className="flex flex-col justify-center items-center" style={{ fontFamily: 'Smack' }}>
-                  <div className="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-clip-border shadow-3xl shadow-shadow-500 dark:text-white dark:!shadow-none p-3">
-                    <div className="grid md:grid-cols-2 gap-2 px-2 w-full mt-[50px]">
-                      <div className="flex flex-col items-start justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
-                        <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Email</p>
-                        <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                          {emal}
-                        </p>
+                  <div className="flex flex-col justify-center items-center" style={{ fontFamily: 'Smack' }}>
+                    <div className="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-clip-border shadow-3xl shadow-shadow-500 dark:text-white dark:!shadow-none p-3">
+                      <div className="grid md:grid-cols-2 gap-2 px-2 w-full mt-[50px]">
+                        <div className="flex flex-col items-start justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
+                          <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Email</p>
+                          <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                            {email}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
+                          <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Age</p>
+                          <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                            {age}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col items-start justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
+                          <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Discord Name</p>
+                          <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                            {discordName}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
+                          <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Discord ID</p>
+                          <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                            {discordId}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col items-start justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 " style={{ marginBottom: "10px" }}>Wallet Network</p>
+                          <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                            {walletNetwork}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
+                          <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Wallet Key</p>
+                          <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                            {walletKey}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col items-start justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 " style={{ marginBottom: "10px" }}>Tech Stack</p>
+                          <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                            {techStack}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
+                          <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Github repo link</p>
+                          <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                            {githubLink}
+                          </p>
+                        </div>
+
                       </div>
-
-                      <div className="flex flex-col justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
-                        <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Age</p>
-                        <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                          {age}
-                        </p>
+                      <div className='flex pt-[10px]'>
+                        <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Developer'))} onChange={(e) => handleRoleChange('Developer')} />} label="Developer" />
+                        <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Project Manager'))} onChange={(e) => handleRoleChange('Project Manager')} />} label="Project Manager" />
+                        <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Administrator'))} onChange={(e) => handleRoleChange('Administrator')} />} label="Administrator" />
                       </div>
-
-                      <div className="flex flex-col items-start justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
-                        <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Discord Name</p>
-                        <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                          {discordName}
-                        </p>
+                      <div className=' flex justify-center items-center w-full mt-[50px] mb-[40px]'>
+                        <div onClick={handleSaveUser} style={{ fontFamily: 'Might', width: '200px', fontSize: '18px', transition: '0.1s' }} className="relative rounded-[15px]  cursor-pointer group font-medium no-underline flex p-2 text-white items-center justify-center content-center focus:outline-none">
+                          <span className="absolute top-0 left-0 w-full h-full rounded-[15px] opacity-50 filter blur-sm bg-gradient-to-br from-[#256fc4] to-[#256fc4]"  ></span>
+                          <span className="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-[#256fc4] to-[#256fc4]"></span>
+                          <span className="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-[#256fc4] to-[#256fc4]"></span>
+                          <span className="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-[#256fc4] from-[#256fc4]"></span>
+                          <span className="relative">Save</span>
+                        </div>
                       </div>
-
-                      <div className="flex flex-col justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
-                        <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Discord ID</p>
-                        <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                          {discordId}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-col items-start justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
-                        <p className="text-sm text-gray-600 dark:text-gray-400 " style={{ marginBottom: "10px" }}>Wallet Network</p>
-                        <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                          {walletNet}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-col justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
-                        <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Wallet Key</p>
-                        <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                          {walletKey}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-col items-start justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
-                        <p className="text-sm text-gray-600 dark:text-gray-400 " style={{ marginBottom: "10px" }}>Tech Stack</p>
-                        <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                          {techStack}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-col justify-center rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
-                        <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Github repo link</p>
-                        <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                          {gitRepo}
-                        </p>
-                      </div>
-
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Zoom>
-        </div>
-        : <></>}
+            </Zoom>
+          </div>
+          : <></>
+      }
 
     </>
   );
@@ -232,7 +272,6 @@ UserTableRow.propTypes = {
   handleClick: PropTypes.func,
   tech: PropTypes.any,
   name: PropTypes.any,
-  project: PropTypes.any,
   selected: PropTypes.any,
   role: PropTypes.string,
 };

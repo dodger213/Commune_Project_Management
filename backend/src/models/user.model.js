@@ -1,28 +1,45 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    maxlength: [20, "name must be less than 20 characters"],
-    trim: true,
-  },
-  bio: {
-    type: String,
-  },
   email: {
     type: String,
+    required: true,
+    trim: true,
   },
-  link: {
+  password: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: Number
+  },
+  role: {
+    type: [{
+      type: String,
+    }
+    ],
+    default: []
+  },
+  discordName: {
     type: String,
   },
-  pubkey: {
-    type: String,
-    required: [true, "Must be provided pubkey"],
-  },
-  avatarFile: {
+  discordId: {
     type: String,
   },
-  bannerFile: {
+  avatar: {
+    type: String,
+    default: 'default'
+  },
+  walletNetwork: {
+    type: String,
+  },
+  walletKey: {
+    type: String,
+  },
+  techStack: {
+    type: String,
+  },
+  githubLink: {
     type: String,
   },
   createdAt: {

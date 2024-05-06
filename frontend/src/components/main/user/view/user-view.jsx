@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
@@ -15,10 +15,12 @@ import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
+import axios from 'axios';
+import { blue } from '@mui/material/colors';
 
 // ----------------------------------------------------------------------
 
-export default function UserPage() {
+export default function UserPage({ userData }) {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -29,7 +31,17 @@ export default function UserPage() {
 
   const [filterName, setFilterName] = useState('');
 
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+
+  const [data, setData] = useState([]);
+  const fetchUserData = async () => {
+    const { data: { users } } = await axios.get(process.env.REACT_APP_API_BASE_URL + "/user")
+    setData(users);
+  }
+  useEffect(() => {
+    setData(userData);
+  }, [userData])
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -41,7 +53,7 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = users.map((n) => n.name);
+      const newSelecteds = data.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -80,28 +92,9 @@ export default function UserPage() {
     setFilterName(event.target.value);
   };
 
-  const users = [{
-    id: "potter",
-    avatarUrl: '/assets/12.png',
-    name: "Potter",
-    email: "potter@gmail.com",
-    project: "ComTensor",
-    tech: 'Blockchain',
-    role: 'Developer',
-  },
-  {
-    id: "potter",
-    avatarUrl: '/assets/12.png',
-    name: "Potter",
-    email: "potter@gmail.com",
-    project: "ComFrontend",
-    tech: 'AI',
-    role: 'Project Manager'
-  },
-  ];
 
   const dataFiltered = applyFilter({
-    inputData: users,
+    inputData: data,
     comparator: getComparator(order, orderBy),
     filterName,
   });
@@ -109,44 +102,44 @@ export default function UserPage() {
   const notFound = !dataFiltered.length && !!filterName;
 
   return (
-    <Container className=' rounded-[50px]' >
-      <Card className=' border-none shadow-sm' style={{borderRadius:"20px", border:"0px"}}>
+    <Container className='pt-[100px] rounded-[50px] '>
+      <Card className=' border-none shadow-sm dark:bg-[rgb(36,36,36)]' style={{ borderRadius: "20px", border: "0px" }}>
         <UserTableToolbar
           numSelected={selected.length}
           filterName={filterName}
           onFilterName={handleFilterByName}
+          className="dark:text-gray-400"
         />
 
-        <TableContainer sx={{ overflow: 'unset' }}>
-          <Table sx={{ minWidth: 800 }}>
+        <TableContainer sx={{ overflow: 'unset',color: "blue" }}>
+          <Table sx={{ minWidth: 800 , color: blue}}>
             <UserTableHead
               order={order}
               orderBy={orderBy}
-              rowCount={users.length}
+              rowCount={data.length}
               numSelected={selected.length}
               onRequestSort={handleSort}
               onSelectAllClick={handleSelectAllClick}
+              sx={{color:blue}}
               headLabel={[
                 { id: 'name', label: 'Name' },
                 { id: 'email', label: 'Email' },
-                { id: 'project', label: 'Working Project' },
+                { id: 'project', label: 'Age' },
                 { id: 'tech', label: 'TechStack', align: 'center' },
                 { id: 'role', label: 'Role' },
+                { id: 'github', label: 'Github' },
                 { id: '' },
               ]}
+              style={{color:"blue"}}
             />
             <TableBody>
               {dataFiltered
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <UserTableRow
-                    key={row.id}
-                    name={row.name}
-                    project={row.project}
-                    role={row.role}
-                    email={row.email}
-                    avatarUrl={row.avatarUrl}
-                    tech={row.tech}
+                    fetchUserData={fetchUserData}
+                    key={row?._id}
+                    {...row}
                     selected={selected.indexOf(row.name) !== -1}
                     handleClick={(event) => handleClick(event, row.name)}
                   />
@@ -154,7 +147,7 @@ export default function UserPage() {
 
               <TableEmptyRows
                 height={77}
-                emptyRows={emptyRows(page, rowsPerPage, users.length)}
+                emptyRows={emptyRows(page, rowsPerPage, data.length)}
               />
 
               {notFound && <TableNoData query={filterName} />}
@@ -165,10 +158,10 @@ export default function UserPage() {
         <TablePagination
           page={page}
           component="div"
-          count={users.length}
+          count={data.length}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25, 50]}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Card>

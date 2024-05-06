@@ -10,12 +10,11 @@ import { Alerts } from '../notification'
 function Main() {
   return (
     <div className='w-full'>
-      <Alerts />
       <Devs />
-      <Pms />
-      <MyProjects />
-      <AllProjects />
-      <NewProjectRequest />
+      {/* <Pms /> */}
+      {/* <MyProjects /> */}
+      {/* <AllProjects /> */}
+      {/* <NewProjectRequest /> */}
     </div>
   )
 }

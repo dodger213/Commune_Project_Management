@@ -14,9 +14,12 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.rounded-lg{
+  border-radius: 10px;
+}
 .App-header {
-  background-color: #282c34;
+  background-color: #000000;
+  background-color: #8080807d;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,6 +29,18 @@
   color: white;
 }
 
+#confetti{
+  left: 50vw;
+}
+.ticket{
+  left: 0%;
+}
+body{
+  height: 100vh;
+}
+div #root{
+  height: 100vh;
+}
 .App-link {
   color: #61dafb;
 }

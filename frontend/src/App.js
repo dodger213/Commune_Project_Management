@@ -4,12 +4,33 @@ import { Routes } from "react-router-dom";
 import React from "react";
 import FrontPage from "./components/frontPage";
 import Dashboard from "./components/dashboard";
+import BountyRequest from "./components/main/bountyRequest";
+import ReviewRequestProjects from "./components/main/reviewRequest";
+import MyProjects from "./components/main/myProjects";
+import NewIdea from "./components/main/newIdea";
+import ProjectCpn from "./components/main/project/projectCpn";
 import ProfilePage from "./components/profilePage";
 import EditProfilePage from "./components/profilePage/editProfilePage";
 import LoginPage from "./components/auth/loginPage";
 import SignupPage from "./components/auth/signupPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@rainbow-me/rainbowkit/styles.css";
+import { useDispatch } from "react-redux";
+import { tokenLogin } from "./redux/actions/usersAction";
+import Devs from "./components/main/devs";
+import AllUsers from "./components/main/users";
+import Pms from "./components/main/pms";
+
+
+
+import Header from "./components/header";
+import Nav from "./components/navbar";
+
+import axios from "axios";
+import {
+  NotificationContainer
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 import {
   RainbowKitProvider,
@@ -37,7 +58,6 @@ import {
 } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import ReactAudioPlayer from "react-audio-player";
 import { ALCHEMY_API_KEY, PROJECT_ID } from "./utils/env";
 
 const { chains, publicClient } = configureChains(
@@ -84,14 +104,29 @@ const wagmiConfig = createConfig({
 
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
+  const token = localStorage.getItem('token')
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const handleLoad = () => {
       setIsLoading(false);
     };
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = token;
+      try {
+        dispatch(tokenLogin());
+      } catch (e) {
+        window.location.href = "/login";
+      }
+    } else {
+      // window.location.href = "/login";
 
+    }
     window.addEventListener("load", handleLoad);
-
+    const rects = document.getElementsByTagName('rect');
+    Array.from(rects).forEach((a) => {
+      // a.setAttribute('fill', '#ffffff00')
+    })
     return () => {
       // Cleanup: Remove the event listener when the component unmounts
       window.removeEventListener("load", handleLoad);
@@ -100,27 +135,21 @@ const App = () => {
 
   return (
     <>
-      <ReactAudioPlayer
-        src="/audio/mix.mp3"
-        autoPlay
-        type="audio/mp3"
-        title="audio"
-      />
+      <NotificationContainer />
 
       <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider chains={chains} coolMode theme={darkTheme()}>
-            <BrowserRouter>
-              <Routes>
-                <Route>
-                  <Route path="/" element={<FrontPage />} />
-                  <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="profile" element={<ProfilePage />} />
-                  <Route path="login" element={<LoginPage />} />
-                  <Route path="signup" element={<SignupPage />} />
-                  <Route path="profile/edit" element={<EditProfilePage />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route>
+                <Route path="/" element={<FrontPage />} />
+                <Route path="*" element={<Layout />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="signup" element={<SignupPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </RainbowKitProvider>
       </WagmiConfig>
     </>
@@ -128,3 +157,25 @@ const App = () => {
 };
 
 export default App;
+
+const Layout = () => {
+  return (
+    <div className="flex w-full dark:bg-[rgb(18,18,18)] bg-[rgb(249,250,251)]">
+      <Nav />
+      <Routes>
+        <Route path="all-projects" element={<Dashboard />} />
+        <Route path="bounty-request" element={<BountyRequest />} />
+        <Route path="review-request" element={<ReviewRequestProjects />} />
+        <Route path="my-projects" element={<MyProjects />} />
+        <Route path="project/:id" element={<ProjectCpn />} />
+        <Route path="new-ideas" element={<NewIdea />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="profile/edit" element={<EditProfilePage />} />
+        <Route path="all-users" element={<AllUsers />} />
+        <Route path="developers" element={<Devs />} />
+        <Route path="project-managers" element={<Pms />} />
+      </Routes>
+    </div>
+  )
+}
+

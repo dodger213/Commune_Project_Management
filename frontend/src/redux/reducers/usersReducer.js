@@ -8,6 +8,10 @@ import {
   UPDATE_USERS_FAILURE,
   UPDATE_USERS_REQUEST,
   UPDATE_USERS_SUCCESS,
+  LOGIN_USERS_REQUEST,
+  LOGIN_USERS_SUCCESS,
+  LOGIN_USERS_FAILURE,
+  LOGOUT,
   PUBKEY,
 } from "../constants/constant";
 
@@ -24,6 +28,7 @@ const initialState = {
   successPost: null,
   errorPost: null,
 
+  isLogged: false,
   // initialState for update a user
   isLoadingUpdate: false,
   successUpdate: null,
@@ -40,6 +45,7 @@ const usersReducer = (state = initialState, action) => {
       };
     case GET_USERS_SUCCESS:
       return {
+        isLogged: true,
         isLoading: false,
         user: action.payload,
         error: null,
@@ -72,6 +78,33 @@ const usersReducer = (state = initialState, action) => {
         errorPost: action.payload,
       };
 
+    case LOGIN_USERS_REQUEST:
+      return {
+        ...state,
+        isLoadingPost: true,
+      };
+    case LOGIN_USERS_SUCCESS:
+      return {
+        ...state,
+        isLogged: true,
+        isLoadingPost: false,
+        user: action.payload.user,
+        errorPost: null,
+      };
+    case LOGIN_USERS_FAILURE:
+      return {
+        ...state,
+        isLoadingPost: false,
+        user: null,
+        errorPost: action.payload,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        isLogged: false,
+        user: null,
+      };
+
     // single user update reducers
     case UPDATE_USERS_REQUEST:
       return {
@@ -97,10 +130,10 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         pubkey: action.payload,
       };
-      
-      default:
-        return state;
-      }
+
+    default:
+      return state;
+  }
 };
 
 export default usersReducer;
