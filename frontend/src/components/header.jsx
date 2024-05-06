@@ -5,8 +5,6 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Pubkey, getUser, createUser } from "../redux/actions/usersAction";
-import { useEffect } from "react";
 import metaIcon from '../assets/metamask-icon.svg'
 import logo from '../assets/commune.gif'
 
@@ -44,21 +42,7 @@ const Header = () => {
     };
   }, [isLogged]);
 
-  const [pubkey, setPubkey] = React.useState('');
-  const [isconnected, setIsconnected] = React.useState(false);
-
   const [mobileMenuVisible, setMobileMenuVisible] = React.useState(false);
-
-  const data = {
-    pubkey: pubkey,
-  }
-  useEffect(() => {
-    if (isconnected) {
-      dispatch(Pubkey(pubkey));
-      dispatch(createUser(data));
-      dispatch(getUser(pubkey));
-    }
-  }, [isconnected]);
 
   const toggleMobileMenu = () => {
     setMobileMenuVisible(!mobileMenuVisible);
@@ -229,10 +213,6 @@ const Header = () => {
                             Wrong network
                           </button>
                         );
-                      }
-                      if (connected) {
-                        setIsconnected(true);
-                        setPubkey(account.displayName);
                       }
                       return (
                         <div className=" flex gap-[15px] justify-center items-center">
