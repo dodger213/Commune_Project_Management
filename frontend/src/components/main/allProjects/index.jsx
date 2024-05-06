@@ -13,7 +13,7 @@ import { NotificationManager } from "react-notifications";
 
 
 
-export default function AllProjects({ hideBtn,data, fetchProjects, viewMode }) {
+export default function AllProjects({ data, fetchProjects, viewMode }) {
     const { user } = useSelector((state) => state.users);
     const [projects, setProjects] = useState([]);
     const [developers, setDevelopers] = useState([]);
@@ -100,7 +100,7 @@ export default function AllProjects({ hideBtn,data, fetchProjects, viewMode }) {
     }
 
     return (
-        <div className='w-full flex flex-col gap-[30px] pt-[100px] mb-[50px]'>
+        <div className='w-full flex flex-col gap-[30px] justify-center mt-[50px] mb-[50px]'>
             <div className='px-[30px] w-full flex justify-end mr-[320px]'>
 
             </div>
@@ -117,26 +117,22 @@ export default function AllProjects({ hideBtn,data, fetchProjects, viewMode }) {
                 >
                     New Idea</button>
                 }
-                {user?.role.some((aRole) => aRole === 'Administrator') && !hideBtn && <button
+                {user?.role.some((aRole) => aRole === 'Administrator') && <button
                     className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-[12px] px-6 rounded-lg bg-gray-900 dark:bg-[rgb(36,36,36)] text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
                     type="button"
                     data-ripple-light="true"
                     style={{ fontFamily: "Smack" }}
                     onClick={handleNew}
                 >
-                    New Project</button>
-                }
+                    New Project</button>}
             </div>
-            <div className='flex flex-wrap justify-start gap-[10px]'>
+            <div className=' flex flex-wrap justify-start gap-[10px]'>
                 {
-                    projects.length === 0 ? 
-                    <div className='w-full flex items-center justify-center text-center text-[20px] text-[#909090]'>
+                    projects.length === 0 ? <div className='w-full flex items-center justify-center text-center text-[20px] text-[#909090]'>
                         <svg style={{ marginTop: '3px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <div className='ml-[10px]'>
-                             No projects
-                        </div>
+                        <div className='ml-[10px]'> No projects</div>
                     </div> :
                         projects?.map((aProject) => (
                             <Projects {...aProject} fetchProjects={fetchProjects} />

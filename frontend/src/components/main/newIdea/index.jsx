@@ -19,8 +19,8 @@ function NewIdea() {
     }
     return (
         <div className="w-full h-full dark:bg-[rgb(18,18,18)] bg-[rgb(249,250,251)] transition-all flex flex-col">
-            <div className=' w-full flex justify-start mt-[80px] h-full'>
-                <AllProjects hideBtn data={projects} fetchProjects={fetchProjects} />
+            <div className=' w-full flex mt-[80px] h-full'>
+                <AllProjects data={projects} fetchProjects={fetchProjects} />
             </div>
         </div>
     )

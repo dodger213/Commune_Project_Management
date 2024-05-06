@@ -22,8 +22,8 @@ function ReviewRequestProjects() {
     }
     return (
         <div className="w-full h-full dark:bg-[rgb(18,18,18)] bg-[rgb(249,250,251)] transition-all flex flex-col">
-            <div className='fixed top-[0px]  w-full flex mt-[80px] h-full min-h-[100vh]  '>
-                <AllProjects hideBtn data={projects} fetchProjects={fetchProjects} viewMode />
+            <div className=' w-full flex mt-[80px] h-full'>
+                <AllProjects data={projects} fetchProjects={fetchProjects} viewMode />
             </div>
         </div>
     )

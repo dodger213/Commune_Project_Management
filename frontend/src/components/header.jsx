@@ -5,6 +5,8 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Pubkey, getUser, createUser } from "../redux/actions/usersAction";
+import { useEffect } from "react";
 import metaIcon from '../assets/metamask-icon.svg'
 import logo from '../assets/commune.gif'
 
@@ -42,9 +44,21 @@ const Header = () => {
     };
   }, [isLogged]);
 
+  const [pubkey, setPubkey] = React.useState('');
+  const [isconnected, setIsconnected] = React.useState(false);
+
   const [mobileMenuVisible, setMobileMenuVisible] = React.useState(false);
 
-
+  const data = {
+    pubkey: pubkey,
+  }
+  useEffect(() => {
+    if (isconnected) {
+      dispatch(Pubkey(pubkey));
+      dispatch(createUser(data));
+      dispatch(getUser(pubkey));
+    }
+  }, [isconnected]);
 
   const toggleMobileMenu = () => {
     setMobileMenuVisible(!mobileMenuVisible);
@@ -62,7 +76,7 @@ const Header = () => {
     navigate('/');
   }
   return (
-    <div className=" fixed w-full bg-[#ffffff] transition-all py-1 sm:py-2 md:py-3 flex items-center justify-between shadow-md dark:bg-[#000000]">
+    <div className=" fixed w-full z-[99] bg-[#ffffff] dark:bg-[rgb(18,18,18)] transition-all py-1 sm:py-2 md:py-3 flex items-center justify-between shadow-md dark:bg-[#000000]">
       <div className="flex items-center justify-between w-full max-w-[1750px] px-4 mx-auto sm:px-6 md:px-8">
         <div className="flex justify-center items-center gap-2">
           <a href='/'>
@@ -96,7 +110,7 @@ const Header = () => {
             {/* <button onClick={openProfilePage} className='dark:text-white text-[#256fc4] text-[18px] sm:text-base md:text-[18px] transition-all evermore hover:opacity-[0.7] no-underline rounded-full dark:hover:text-white hover:text-blue-800' style={{ fontFamily: 'Smack' }}>
               Profile
             </button> */}
-            {isLogged && <Menu as="div" className="relative inline-block text-left z-[999]">
+            {isLogged && <Menu as="div" className="relative inline-block text-left z-[99]">
               <div className="mt-[5px]">
                 <Menu.Button className="inline-flex w-full justify-center rounded-[50px] text-sm font-semibold text-gray-900 dark:text-[white] shadow-sm ring-1 ring-inset ring-gray-300">
                   <div
@@ -120,7 +134,7 @@ const Header = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute mt-4 right-0 w-[185px] origin-top-right divide-y divide-gray-100 dark:divide-[rgb(18,18,18)] rounded-md bg-[#ffffff] dark:bg-[rgb(27,27,27)] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute z-50 mt-4 right-0 w-[185px] origin-top-right divide-y divide-gray-100 dark:divide-[rgb(18,18,18)] rounded-md bg-[#ffffff] dark:bg-[rgb(27,27,27)] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="p-[25px] flex flex-col justify-start items-start gap-[20px]">
                     <Menu.Item>
                       <div className=' flex justify-center items-center gap-[15px]'>
@@ -135,7 +149,7 @@ const Header = () => {
                     </Menu.Item>
                     <Menu.Item>
                       <div
-                        className="flex items-center justify-center gap-[15px] cursor-pointer"
+                        className="flex items-center justify-center gap-[15px]"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-[#fff]">
                           <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
@@ -216,8 +230,26 @@ const Header = () => {
                           </button>
                         );
                       }
+                      if (connected) {
+                        setIsconnected(true);
+                        setPubkey(account.displayName);
+                      }
                       return (
                         <div className=" flex gap-[15px] justify-center items-center">
+                          {/* <svg class="h-8 w-8 text-[#256fc4] dark:text-[white]" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />  <path d="M7 12h14l-3 -3m0 6l3 -3" /></svg>
+                          <button onClick={() => handleBuyButton(account.address, selectedCurrency)} type="button" className='dark:text-white text-[#256fc4] text-[18px] sm:text-base md:text-[18px] transition-all evermore hover:opacity-[0.7] no-underline rounded-full dark:hover:text-white hover:text-blue-800' style={{ fontFamily: 'Smack' }}>
+                            SignOut
+                          </button> */}
+                          {/* <div className=" flex gap-[7px] justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-7 w-7 text-[#256fc4] dark:text-[white]">
+                              <path fillRule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clipRule="evenodd" />
+                            </svg>
+                            {
+                              user && user.user.avatarFile ? 
+                              <img className="w-8 h-8" src={user.user.avatarFile} alt="" />
+                              : <img className="w-8 h-8 rounded-[50%]" src="./images/12.png" alt="" />
+                            }
+                          </div> */}
                           <div
                             className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-3 rounded-lg bg-gradient-to-tr from-[#ffffff] dark:from-[rgb(27,27,27)] dark:to-[rgb(27,27,27)] cursor-pointer to-[#dedede] text-[rgb(18,18,18)] dark:text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] flex items-center gap-1"
                             onClick={openChainModal} style={{ fontFamily: 'Smack' }}>

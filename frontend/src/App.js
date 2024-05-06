@@ -58,6 +58,7 @@ import {
 } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import ReactAudioPlayer from "react-audio-player";
 import { ALCHEMY_API_KEY, PROJECT_ID } from "./utils/env";
 
 const { chains, publicClient } = configureChains(
@@ -136,6 +137,13 @@ const App = () => {
   return (
     <>
       <NotificationContainer />
+
+      <ReactAudioPlayer
+        src="/audio/mix.mp3"
+        autoPlay
+        type="audio/mp3"
+        title="audio"
+      />
 
       <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider chains={chains} coolMode theme={darkTheme()}>
