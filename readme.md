@@ -85,6 +85,8 @@ manage projects of CommuneAI**
 
   - **Avatar File Upload.**
 
+  - **Can see user detail card on hover the user avatar.**
+
 
 <video width="600" height="300" controls>
   <source src="./images/add.mp4" type="video/mp4">
