@@ -84,7 +84,7 @@ const EditProfilePage = () => {
                                             <img className='w-full shadow-lg' src={avatarFile.url} alt="" />
                                         </span>
                                         : <span className='w-full h-full flex overflow-y-hidden'>
-                                            <img className='w-full shadow-lg' src={(userData?.avatar === 'default' || !userData?.avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_URL}/${userData?.avatar}`} alt="" />
+                                            <img className='w-full shadow-lg' src={(userData?.avatar === 'default' || !userData?.avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_BASE_URL}/${userData?.avatar}`} alt="" />
                                         </span>
                                     }
                                 </div>

@@ -26,7 +26,7 @@ app.use(morgan('dev'));
 
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
-app.use(express.static(path.join(__dirname, "uploads")));
+app.use('/api/v1',express.static(path.join(__dirname, "uploads")));
 
 app.use(express.json());
 

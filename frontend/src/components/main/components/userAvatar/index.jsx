@@ -14,14 +14,14 @@ function UserAvatar({ user }) {
     return (
         <>
             <div >
-                <img onMouseEnter={showDetail} onMouseLeave={hiddenDetail} className="rounded-[50%] w-[40px] h-[40px] -ml-[15px]" style={{ maxWidth: " max-content" }} src={(user?.avatar === 'default' || !user?.avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_URL}/${user?.avatar}`} alt="" />
+                <img onMouseEnter={showDetail} onMouseLeave={hiddenDetail} className="rounded-[50%] w-[40px] h-[40px] -ml-[15px]" style={{ maxWidth: " max-content" }} src={(user?.avatar === 'default' || !user?.avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_BASE_URL}/${user?.avatar}`} alt="" />
             </div>
             <div className='relative'>
                 {isDetail ?
                     <div className="flex  flex-col justify-center items-center z-[200] w-[350px] absolute">
                         <div className="relative flex flex-col items-center p-[15px] rounded-[10px] dark:bg-[rgb(30,30,30)] bg-[#dedede] w-full mx-auto bg-clip-border shadow-3xl shadow-shadow-500 dark:text-white dark:!shadow-none">
                             <div className=' w-full flex gap-[30px] justify-start items-center mt-[10px]'>
-                                <img className="rounded-[50%] w-[70px] h-[70px] ml-[15px]" style={{ maxWidth: " max-content" }} src={(user?.avatar === 'default' || !user?.avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_URL}/${user?.avatar}`} alt="" />
+                                <img className="rounded-[50%] w-[70px] h-[70px] ml-[15px]" style={{ maxWidth: " max-content" }} src={(user?.avatar === 'default' || !user?.avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_BASE_URL}/${user?.avatar}`} alt="" />
                                 {user?.role.map((a, idx) => (
                                     <Label key={idx} color="error" className=" -ml-[15px] mt-[35px]">{a}</Label>
                                 ))}
