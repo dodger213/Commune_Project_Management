@@ -626,12 +626,12 @@ function ProjectCpn() {
                                             </FormControl>
                                         </Box>
                                         {status === 'In progress' &&
-                                            <FormControlLabel control={<Checkbox onChange={({ target: { checked } }) => {
+                                            <FormControlLabel className=" dark:text-white" control={<Checkbox onChange={({ target: { checked } }) => {
                                                 // setMarked(checked);
                                             }} />} label="Mark as completed" />
                                         }
                                         {status === 'Completed' &&
-                                            <FormControlLabel control={<Checkbox onChange={({ target: { checked } }) => {
+                                            <FormControlLabel className=" dark:text-white" control={<Checkbox onChange={({ target: { checked } }) => {
                                                 // setIncompleted(checked);
                                             }} />} label="Mark as incompleted" />
                                         }

@@ -21,15 +21,11 @@ import Devs from "./components/main/devs";
 import AllUsers from "./components/main/users";
 import Pms from "./components/main/pms";
 
-
-
 import Header from "./components/header";
 import Nav from "./components/navbar";
 
 import axios from "axios";
-import {
-  NotificationContainer
-} from "react-notifications";
+import { NotificationContainer } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 
 import {
@@ -105,7 +101,7 @@ const wagmiConfig = createConfig({
 
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -121,13 +117,12 @@ const App = () => {
       }
     } else {
       // window.location.href = "/login";
-
     }
     window.addEventListener("load", handleLoad);
-    const rects = document.getElementsByTagName('rect');
+    const rects = document.getElementsByTagName("rect");
     Array.from(rects).forEach((a) => {
       // a.setAttribute('fill', '#ffffff00')
-    })
+    });
     return () => {
       // Cleanup: Remove the event listener when the component unmounts
       window.removeEventListener("load", handleLoad);
@@ -167,6 +162,11 @@ const App = () => {
 export default App;
 
 const Layout = () => {
+  const token = localStorage.getItem("token");
+  if (token === null || token === "undefined") {
+    window.location.href = "/login";
+  }
+
   return (
     <div className="flex w-full dark:bg-[rgb(18,18,18)] bg-[rgb(249,250,251)]">
       <Nav />
@@ -184,6 +184,5 @@ const Layout = () => {
         <Route path="project-managers" element={<Pms />} />
       </Routes>
     </div>
-  )
-}
-
+  );
+};

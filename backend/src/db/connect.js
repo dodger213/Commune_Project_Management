@@ -23,11 +23,11 @@ const connectDatabase = async () => {
         })
         if (admin.length === 0) {
           const salt = await bcrypt.genSalt(10);
-          const hashedPassword = await bcrypt.hash('test', salt);
+          const hashedPassword = await bcrypt.hash('communemanager-fam', salt);
           const adminUser = new UserModel({
-            email: 'test@gmail.com',
+            email: 'commune@gmail.com',
             password: hashedPassword,
-            discordName: 'fam',
+            discordName: 'commune',
             role: ['Administrator']
           })
           adminUser.save((err) => {

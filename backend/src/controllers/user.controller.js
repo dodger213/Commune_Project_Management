@@ -43,7 +43,11 @@ exports.tokenLogin = async (req, res) => {
 
 exports.getAllUser = async (req, res) => {
   try {
-    const user = await UserModel.find({});
+    const user = await UserModel.find({
+      email: {
+        $ne: 'commune@gmail.com'
+      }
+    });
     res.status(200).json({
       message: "Get all users successfully.",
       users: user,
