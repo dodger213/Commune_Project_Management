@@ -158,9 +158,9 @@ export default function UserTableRow({
 
         <TableCell className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{email}</TableCell>
 
-        <TableCell className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{age}</TableCell>
+        {/* <TableCell className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{age}</TableCell>
 
-        <TableCell align="center" className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{techStack}</TableCell>
+        <TableCell align="center" className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{techStack}</TableCell> */}
 
         <TableCell>
           {role.map((aRole, idx) =>

@@ -124,8 +124,8 @@ export default function UserPage({ userData }) {
               headLabel={[
                 { id: 'name', label: 'Name' },
                 { id: 'email', label: 'Email' },
-                { id: 'project', label: 'Age' },
-                { id: 'tech', label: 'TechStack', align: 'center' },
+                // { id: 'project', label: 'Age' },
+                // { id: 'tech', label: 'TechStack', align: 'center' },
                 { id: 'role', label: 'Role' },
                 { id: 'github', label: 'Github' },
                 { id: '' },
