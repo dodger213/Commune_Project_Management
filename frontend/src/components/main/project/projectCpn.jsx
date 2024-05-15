@@ -313,7 +313,7 @@ function ProjectCpn() {
                                 </div>
                                 <div className=" h-[25px] mt-[5px] dark:text-gray-200 flex justify-start items-center gap-[10px]">
                                     <Label color={"error"}>Repo</Label>
-                                    <span className="text-gray-500 dark:text-gray-400 text-[10px] mt-[4px]">{project.githubLink?.length > 0 ? <Link target="_blank" className="text-gray-500 dark:text-gray-400" to={project.liveDemo}> {project.githubLink} </Link> : "..."}</span>
+                                    <span className="text-gray-500 dark:text-gray-400 text-[10px] mt-[4px]">{project.githubLink?.length > 0 ? <Link target="_blank" className="text-gray-500 dark:text-gray-400" to={project.githubLink}> {project.githubLink} </Link> : "..."}</span>
                                 </div>
                             </div>
                         </div>

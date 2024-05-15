@@ -171,7 +171,6 @@ export default function UserTableRow({
         </TableCell>
         <TableCell className=' dark:text-gray-200'>
           <Link to={githubLink} target='_blank' className='dark:text-gray-200'>{githubLink}</Link>
-          {console.log(githubLink)}
         </TableCell>
 
         {user?.role.some((aRole) => aRole === 'Administrator') && < TableCell align="right">

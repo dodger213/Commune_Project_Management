@@ -275,7 +275,7 @@ export function Projects(project) {
                     </div>
                     <div className=" h-[25px] mt-[5px] dark:text-gray-200 flex justify-start items-center gap-[10px]">
                         <Label color={"error"}>Repo</Label> 
-                        <span className="text-gray-500 dark:text-gray-400 text-[10px] mt-[4px]">{project.githubLink?.length > 0 ? <Link target="_blank" className="text-gray-500 dark:text-gray-400" to={project.liveDemo}> {project.githubLink} </Link> : "..."}</span>
+                        <span className="text-gray-500 dark:text-gray-400 text-[10px] mt-[4px]">{project.githubLink?.length > 0 ? <Link target="_blank" className="text-gray-500 dark:text-gray-400" to={project.githubLink}> {project.githubLink} </Link> : "..."}</span>
                     </div>
                     <div className="pb-[5px] mt-[5px] px-[0px] w-full flex items-center justify-start">
                         <div className="  w-full flex justify-start items-start gap-[50px] ml-[0px]">
