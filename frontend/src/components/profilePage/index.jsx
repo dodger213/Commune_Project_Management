@@ -41,7 +41,7 @@ function ProfilePage() {
                         <div className="grid md:grid-cols-2 gap-4 px-2 w-full mt-[50px]">
                             <div className="flex flex-col items-start justify-center rounded-2xl shadow-sm bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
                                 <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Email</p>
-                                <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                                <p className="text-[13px] font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
                                     {userData?.email}
                                 </p>
                             </div>
@@ -83,15 +83,17 @@ function ProfilePage() {
 
                             <div className="flex flex-col items-start justify-center shadow-sm rounded-2xl bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
                                 <p className="text-sm text-gray-600 dark:text-gray-400 " style={{ marginBottom: "10px" }}>Tech Stack</p>
-                                <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                                    {userData?.techStack}
+                                <p className="text-[13px] font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                                    {/* {userData?.techStack} */}
+                                    {userData?.techStack?.length > 35 ? userData?.techStack?.slice(0, 34) + '...' : userData?.techStack}
+
                                 </p>
                             </div>
 
                             <div className="flex flex-col justify-center rounded-2xl shadow-sm bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
                                 <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Github repo link</p>
                                 <p className="text-[10px] font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                                   <Link target='_blank' className='text-navy-700 dark:text-gray-200' to={userData?.githubLink}> {userData?.githubLink} </Link>
+                                    <Link target='_blank' className='text-navy-700 dark:text-gray-200' to={userData?.githubLink}> {userData?.githubLink} </Link>
                                 </p>
                             </div>
 
