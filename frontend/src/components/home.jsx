@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const HomePage = (props) => {
     const navigate = useNavigate();
     const handleStart = () => {
-        navigate(`all-projects`);
+        navigate(`all-bounties`);
     }
     return (
 

@@ -17,7 +17,7 @@ function LoginPage() {
     const { isLogged } = useSelector((state) => state.users)
     useEffect(() => {
         if (isLogged) {
-            navigate('/all-projects')
+            navigate('/all-bounties')
         }
     }, [isLogged])
     const OpenSignupPage = () => {

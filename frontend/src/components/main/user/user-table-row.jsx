@@ -41,7 +41,7 @@ export default function UserTableRow({
 
   const [avatarFile, setAvatarFile] = useState("./images/12.png");
   const [updateRole, setUpdateRole] = useState(role);
-  const { user } = useSelector((state) => state.users);
+  const { user,isLogged } = useSelector((state) => state.users);
 
 
   const [open, setOpen] = useState(null);
@@ -287,20 +287,22 @@ export default function UserTableRow({
                       </div>
 
                     </div>
-                    <div className='flex pt-[10px]'>
+                    {isLogged && user?.role.some((a) => a === 'Administrator') && [
+                      <div className='flex pt-[10px]'>
                       <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Developer'))} onChange={(e) => handleRoleChange('Developer')} />} label="Developer" />
                       <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Project Manager'))} onChange={(e) => handleRoleChange('Project Manager')} />} label="Project Manager" />
                       <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Administrator'))} onChange={(e) => handleRoleChange('Administrator')} />} label="Administrator" />
-                    </div>
+                    </div>,
                     <div className=' flex justify-center items-center w-full mt-[50px] mb-[40px]'>
-                      <div onClick={handleSaveUser} style={{ fontFamily: 'Might', width: '200px', fontSize: '18px', transition: '0.1s' }} className="relative rounded-[15px]  cursor-pointer group font-medium no-underline flex p-2 text-white items-center justify-center content-center focus:outline-none">
-                        <span className="absolute top-0 left-0 w-full h-full rounded-[15px] opacity-50 filter blur-sm bg-gradient-to-br from-[#256fc4] to-[#256fc4]"  ></span>
-                        <span className="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-[#256fc4] to-[#256fc4]"></span>
-                        <span className="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-[#256fc4] to-[#256fc4]"></span>
-                        <span className="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-[#256fc4] from-[#256fc4]"></span>
-                        <span className="relative">Save</span>
-                      </div>
+                    <div onClick={handleSaveUser} style={{ fontFamily: 'Might', width: '200px', fontSize: '18px', transition: '0.1s' }} className="relative rounded-[15px]  cursor-pointer group font-medium no-underline flex p-2 text-white items-center justify-center content-center focus:outline-none">
+                      <span className="absolute top-0 left-0 w-full h-full rounded-[15px] opacity-50 filter blur-sm bg-gradient-to-br from-[#256fc4] to-[#256fc4]"  ></span>
+                      <span className="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-[#256fc4] to-[#256fc4]"></span>
+                      <span className="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-[#256fc4] to-[#256fc4]"></span>
+                      <span className="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-[#256fc4] from-[#256fc4]"></span>
+                      <span className="relative">Save</span>
                     </div>
+                  </div>
+                    ]}
                   </div>
                 </div>
               </div>
