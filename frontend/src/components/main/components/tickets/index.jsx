@@ -32,12 +32,23 @@ function Ticket({
     handleTicketStatusForward,
     view
 }) {
+    const renderDescription = (description, size) => {
+        let result = [];
+        for (var i = 0; i < description.length; i += size) {
+            result.push(description.slice(i, i + size));
+        }
+        return (
+            result.map((a, idx) => (
+                <div key={idx}>{a}</div>
+            ))
+        )
+    }
     return (
         <div
             className={`${view ? 'invisible' : 'absolute'} w-[20%] duration-500 h-[310px] flex items-center p-[10px] `}
             style={{
                 left: `${ticketStatus.indexOf(ticket.status) * 20}%`,
-                zIndex: 10,
+                zIndex: 1,
             }}
         >
             <div className={`w-[100%] bg-[#fff] dark:bg-[rgb(36,36,36)] dark:border-[0px] border-[1px] border-gray-200 rounded-lg ticket shadow-md`}
@@ -49,9 +60,11 @@ function Ticket({
                 </div>
                 <div className='text-base flex items-center justify-between text-slate-700 p-[10px] px-[20px] item-content before:bg-red-500 border-b-[1px] border-[#8080807d] '>
                     <div className='flex items-center w-full justify-start'>
-                        <UserAvatar user={ticket.developer} />
+                        {/* <UserAvatar user={ticket.developer} /> */}
+                        <img className="rounded-[50%] w-[40px] h-[40px]" src={(ticket.developer?.avatar === 'default' || !ticket.developer?.avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_BASE_URL}/${ticket.developer?.avatar}`} alt="" />
                         <div className='ml-[5px] dark:text-gray-200'>
-                            {ticket.title}
+                            {ticket.title.length > 20 ? ticket.title.slice(0, 20) + '...' : ticket.title}
+
                         </div>
                     </div>
                     <div className='dropdown'>
@@ -86,8 +99,8 @@ function Ticket({
                     </div>
                 </div>
                 <div
-                    className='text-base text-slate-700 p-4 item-content before:bg-red-500 h-[100px] overflow-y-scroll dark:text-gray-200'>
-                    {ticket.description}
+                    className='text-base text-slate-700 p-2 item-content before:bg-red-500 h-[100px] w-full overflow-y-scroll dark:text-gray-200 overflow-x-hidden whitespace-pre'>
+                    {renderDescription(ticket.description, 40)}
                 </div>
                 <div className='p-[10px] flex  items-center '>
                     <Label color="error" className="">${ticket.budget}</Label>
@@ -99,7 +112,7 @@ function Ticket({
                             backgroundColor: `${bgs[ticketStatus.indexOf(ticket.status)]}`,
                         }}
                     >
-                        {ticket.status}
+                        {ticket.status === "Bounty Request" ? "Payment Request" : ticket.status}
                     </div>
                     {ticket.status === 'Progressing' &&
                         (!ticket.reviewRequire ?
@@ -149,8 +162,6 @@ function Ticket({
                                 <span className='absolute -top-2 -right-2 w-5 h-5 text-xs font-bold flex items-center justify-center bg-teal-500 text-white rounded-full'>3</span>
                             </button>
                             <button className='relative rounded-full flex justify-center items-center'>
-                                {/* <UserAvatar avatar={devAvatarFile} /> */}
-                                {/* <UserAvatar avatar={devAvatarFile} /> */}
                             </button>
                         </div>
                     </div>

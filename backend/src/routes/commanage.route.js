@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { getAUser, tokenLogin, getAllUser, getAllDevelopers, getAllPms, createAUser, signin, updateAUser, deleteAUser } = require("../controllers/user.controller");
+const { getAUser, getAllAdmins, tokenLogin, getAllUser, getAllDevelopers, getAllPms, createAUser, signin, updateAUser, deleteAUser } = require("../controllers/user.controller");
 const { getAllProject, getNewIdeas, getBountyRequetsProjects, getReviewRequestProjects, getUserProject, getAProject, createAProject, updateAProject, deleteAProject } = require("../controllers/project.controller");
 const { getProjectTicket, createATicket, updateATicket, deleteATicket } = require("../controllers/ticket.controller");
 const passport = require("passport");
@@ -20,6 +20,7 @@ router.delete("/user/:id", deleteAUser);
 router.get("/user", getAllUser);
 router.get("/users/devs", getAllDevelopers);
 router.get("/users/pms", getAllPms);
+router.get("/users/admins", getAllAdmins);
 
 router.get("/project", getAllProject);
 router.get("/project/bounty", getBountyRequetsProjects);

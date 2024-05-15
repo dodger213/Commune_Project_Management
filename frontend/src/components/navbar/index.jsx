@@ -11,14 +11,15 @@ import {
   CurrencyDollarIcon,
   CodeBracketIcon,
   RocketLaunchIcon,
-  DocumentPlusIcon
+  DocumentPlusIcon,
+  UserCircleIcon
 } from "@heroicons/react/24/solid";
 
 import MenuItem from './menuItem';
 
 function Nav() {
   const [activeKey, setActiveKey] = useState('');
-  const { user } = useSelector((state) => state.users);
+  const { user, isLogged } = useSelector((state) => state.users);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isPm, setIsPm] = useState(false);
   const [isDev, setIsDev] = useState(false);
@@ -31,20 +32,20 @@ function Nav() {
     setIsDev(isDev);
   }, [user])
   return (
-    <div className='w-[450px] pt-[100px] bg-[rgb(249,250,251)] dark:bg-[rgb(18,18,18)] min-h-[100vh]' style={{ fontFamily: 'Might' }}>
+    <div className=' w-[450px] pt-[100px] bg-[rgb(249,250,251)] dark:bg-[rgb(18,18,18)] min-h-[100vh]' style={{ fontFamily: 'Might' }}>
       <div className="fixed h-full w-full  shadow-sm	 max-w-[20rem] p-4 bg-[rgb(249,250,251)] dark:bg-[rgb(18,18,18)] border-[0px]">
         <List style={{ fontFamily: 'Might' }} className=' dark:text-gray-300'>
-          <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'All Projects'} Icon={
+          <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'All Bounties'} Icon={
             <Squares2X2Icon className="h-6 w-6" />
           } />
-          {!isAdmin && <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'My Projects'} Icon={
+          {!isAdmin && isLogged && <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'My Bounties'} Icon={
             <BriefcaseIcon className="h-6 w-6" />
           } />}
           {isPm && <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'Review Request'} Icon={
             <CheckBadgeIcon className="h-6 w-6" />
           }
           />}
-          {isAdmin && <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'Bounty Request'} Icon={
+          {isAdmin && <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'Payment Request'} Icon={
             <CurrencyDollarIcon className="h-6 w-6" />
           } />}
           <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'New Ideas'} Icon={
@@ -55,6 +56,9 @@ function Nav() {
           } />
           <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'Project Managers'} Icon={
             <RocketLaunchIcon className="h-6 w-6" />
+          } />
+          <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'Administrators'} Icon={
+            <UserCircleIcon className="h-6 w-6" />
           } />
           <MenuItem active={activeKey} setActiveKey={setActiveKey} title={'All Users'} Icon={
             <UserPlusIcon className="h-6 w-6" />

@@ -9,6 +9,12 @@ const projectSchema = Schema({
     description: {
         type: String,
     },
+    githubLink: {
+        type: String,
+    },
+    liveDemo: {
+        type: String,
+    },
     status: {
         type: String,
     },
@@ -19,12 +25,6 @@ const projectSchema = Schema({
         },
     ],
     stars: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "User",
-        },
-    ],
-    views: [
         {
             type: Schema.Types.ObjectId,
             ref: "User",
@@ -48,6 +48,10 @@ const projectSchema = Schema({
             ref: "User",
         },
     ],
+    avatar: {
+        type: String,
+        default: 'default'
+    },
     createdAt: {
         type: Date,
         default: Date.now,

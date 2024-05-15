@@ -86,6 +86,24 @@ exports.getAllPms = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 }
+exports.getAllAdmins = async (req, res) => {
+  try {
+    const user = await UserModel.find({
+      role: {
+        $in: ['Administrator']
+      },
+      email: {
+        $ne: 'commune@gmail.com'
+      }
+    });
+    res.status(200).json({
+      message: "Get all users successfully.",
+      users: user,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
   let user = await UserModel.findOne({ email });

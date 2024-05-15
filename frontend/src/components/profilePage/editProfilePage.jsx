@@ -47,7 +47,6 @@ const EditProfilePage = () => {
         try {
             await axios.put(process.env.REACT_APP_API_BASE_URL + "/user/" + user?._id, avatar === "" ? userData : { ...userData, avatar })
             NotificationManager.success('User updated successfully', 'Success')
-            // getUserData();
             dispatch(getUser(userData?._id));
         }
         catch (e) {

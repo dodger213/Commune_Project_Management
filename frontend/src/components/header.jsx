@@ -72,7 +72,7 @@ const Header = () => {
           </a>
           <span onClick={() => {
             navigate(isLogged ? '/dashboard' : '/')
-          }} className=' no-underline dark:text-white transition-all'><p className=' cursor-pointer text-[24px] font-bold mt-[7px]'>Commune Management</p></span>
+          }} className=' no-underline dark:text-white transition-all'><p className=' cursor-pointer text-[24px] font-bold mt-[7px]'>Commune Management v1.2</p></span>
         </div>
         <nav className="flex-wrap gap-3 items-center hidden space-x-4 pc-menu md:flex">
           <div className=''>
@@ -152,6 +152,60 @@ const Header = () => {
                         </svg>
                         <span onClick={handleLogOut} className=" text-[#256fc4] dark:text-white cursor-pointer" style={{ fontFamily: 'Smack' }}>
                           Log Out
+                        </span>
+                      </div>
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>}
+            {!isLogged && <Menu as="div" className="relative inline-block text-left z-[99]">
+              <div className="mt-[5px]">
+                <Menu.Button className="inline-flex w-full justify-center rounded-[50px] text-sm font-semibold text-gray-900 dark:text-[white] shadow-sm ring-1 ring-inset ring-gray-300">
+                  <div
+                    id="mobile-menu-button"
+                    className="p-1 dark:text-white focus:outline-none"
+                  >
+                    {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-12 w-12 text-[#256fc4] dark:text-[white]">
+                      <path fillRule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clipRule="evenodd" />
+                    </svg> */}
+                    <img className='header-user' src={'/images/12.png'} alt="" />
+
+                  </div>
+                </Menu.Button>
+              </div>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute z-50 mt-4 right-0 w-[185px] origin-top-right divide-y divide-gray-100 dark:divide-[rgb(18,18,18)] rounded-md bg-[#ffffff] dark:bg-[rgb(27,27,27)] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="p-[25px] flex flex-col justify-start items-start gap-[20px]">
+                    <Menu.Item>
+                      <div className=' flex justify-center items-center gap-[15px]'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-[#fff]">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+
+                        <span onClick={() => navigate('/login')} className=" text-[#256fc4] cursor-pointer dark:text-white" style={{ fontFamily: 'Smack' }}>
+                          Sign In
+                        </span>
+                      </div>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <div
+                        className="flex items-center justify-center gap-[15px]"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-[#fff]">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                        </svg>
+
+                        <span onClick={() => navigate('/signup')} className=" text-[#256fc4] dark:text-white cursor-pointer" style={{ fontFamily: 'Smack' }}>
+                          Sign Up
                         </span>
                       </div>
                     </Menu.Item>

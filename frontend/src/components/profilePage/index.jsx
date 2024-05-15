@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Label from '../main/components/label/label';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 function ProfilePage() {
     const { useState } = React;
@@ -75,7 +76,7 @@ function ProfilePage() {
 
                             <div className="flex flex-col justify-center rounded-2xl shadow-sm bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
                                 <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Wallet Key</p>
-                                <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                                <p className="text-[11px] font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
                                     {userData?.walletKey}
                                 </p>
                             </div>
@@ -89,8 +90,8 @@ function ProfilePage() {
 
                             <div className="flex flex-col justify-center rounded-2xl shadow-sm bg-[#fff] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:bg-[rgb(33,33,33)] dark:shadow-none">
                                 <p className="text-sm text-gray-600 dark:text-gray-400" style={{ marginBottom: "10px" }}>Github repo link</p>
-                                <p className="text-base font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
-                                    {userData?.githubLink}
+                                <p className="text-[10px] font-medium text-navy-700 dark:text-gray-200" style={{ marginBottom: "0" }}>
+                                   <Link target='_blank' className='text-navy-700 dark:text-gray-200' to={userData?.githubLink}> {userData?.githubLink} </Link>
                                 </p>
                             </div>
 

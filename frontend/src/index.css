@@ -211,3 +211,14 @@ code {
 p {
   margin-bottom: 0 !important;
 }
+.search-input{
+  padding: 10px;
+  border-radius: 10px 0px 0px 10px;
+  border: 1px solid gray;
+  width: 300px;
+}
+.search-button{
+  padding: 10px;
+  border-radius: 0px 10px 10px 0px;
+  border: 1px solid gray;
+}

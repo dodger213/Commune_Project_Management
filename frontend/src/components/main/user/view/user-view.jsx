@@ -103,7 +103,7 @@ export default function UserPage({ userData }) {
 
   return (
     <Container className='pt-[100px] rounded-[50px] '>
-      <Card className=' border-none shadow-sm dark:bg-[rgb(36,36,36)]' style={{ borderRadius: "20px", border: "0px" }}>
+      <Card className=' border-none shadow-sm dark:bg-[rgb(36,36,36)]' style={{ borderRadius: "20px", border: "0px" }} >
         <UserTableToolbar
           numSelected={selected.length}
           filterName={filterName}
@@ -163,6 +163,7 @@ export default function UserPage({ userData }) {
           onPageChange={handleChangePage}
           rowsPerPageOptions={[10, 25, 50]}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          className=' dark:text-gray-200'
         />
       </Card>
     </Container>

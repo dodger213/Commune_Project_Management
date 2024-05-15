@@ -34,11 +34,12 @@ export default function UserTableToolbar({ numSelected, filterName, onFilterName
           value={filterName}
           onChange={onFilterName}
           placeholder="Search user..."
-          className=' rounded-[20px]'
+          className=' rounded-[20px] dark:text-gray-200 dark:border-gray-200 border-[1px]'
           startAdornment={
-            <InputAdornment position="start">
+            <InputAdornment position="start" className=' dark:text-gray-200'>
               <Iconify
                 icon="eva:search-fill"
+                className=' dark:text-gray-200'
                 sx={{ color: 'text.disabled', width: 20, height: 20 }}
               />
             </InputAdornment>
@@ -53,7 +54,7 @@ export default function UserTableToolbar({ numSelected, filterName, onFilterName
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
+        <Tooltip title="Filter list" className=' dark:text-gray-200'>
           <IconButton>
             <Iconify icon="ic:round-filter-list" />
           </IconButton>

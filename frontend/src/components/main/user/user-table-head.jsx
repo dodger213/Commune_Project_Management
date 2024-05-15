@@ -37,12 +37,14 @@ export default function UserTableHead({
             align={headCell.align || 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
             sx={{ width: headCell.width, minWidth: headCell.minWidth }}
+            style={{ fontFamily: 'Smack'}}
           >
             <TableSortLabel
               hideSortIcon
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={onSort(headCell.id)}
+              className=' dark:text-gray-200 focus:text-white active:text-white'
             >
               {headCell.label}
               {orderBy === headCell.id ? (

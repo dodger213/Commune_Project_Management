@@ -20,6 +20,7 @@ import { tokenLogin } from "./redux/actions/usersAction";
 import Devs from "./components/main/devs";
 import AllUsers from "./components/main/users";
 import Pms from "./components/main/pms";
+import Admins from "./components/main/admins";
 
 import Header from "./components/header";
 import Nav from "./components/navbar";
@@ -54,7 +55,7 @@ import {
 } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import ReactAudioPlayer from "react-audio-player";
+// import ReactAudioPlayer from "react-audio-player";
 import { ALCHEMY_API_KEY, PROJECT_ID } from "./utils/env";
 
 const { chains, publicClient } = configureChains(
@@ -133,12 +134,12 @@ const App = () => {
     <>
       <NotificationContainer />
 
-      <ReactAudioPlayer
+      {/* <ReactAudioPlayer
         src="/audio/mix.mp3"
         autoPlay
         type="audio/mp3"
         title="audio"
-      />
+      /> */}
 
       <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider chains={chains} coolMode theme={darkTheme()}>
@@ -162,19 +163,19 @@ const App = () => {
 export default App;
 
 const Layout = () => {
-  const token = localStorage.getItem("token");
-  if (token === null || token === "undefined") {
-    window.location.href = "/login";
-  }
+  // const token = localStorage.getItem("token");
+  // if (token === null || token === "undefined") {
+  //   window.location.href = "/login";
+  // }
 
   return (
     <div className="flex w-full dark:bg-[rgb(18,18,18)] bg-[rgb(249,250,251)]">
       <Nav />
       <Routes>
-        <Route path="all-projects" element={<Dashboard />} />
-        <Route path="bounty-request" element={<BountyRequest />} />
+        <Route path="all-bounties" element={<Dashboard />} />
+        <Route path="payment-request" element={<BountyRequest />} />
         <Route path="review-request" element={<ReviewRequestProjects />} />
-        <Route path="my-projects" element={<MyProjects />} />
+        <Route path="my-bounties" element={<MyProjects />} />
         <Route path="project/:id" element={<ProjectCpn />} />
         <Route path="new-ideas" element={<NewIdea />} />
         <Route path="profile" element={<ProfilePage />} />
@@ -182,6 +183,7 @@ const Layout = () => {
         <Route path="all-users" element={<AllUsers />} />
         <Route path="developers" element={<Devs />} />
         <Route path="project-managers" element={<Pms />} />
+        <Route path="administrators" element={<Admins />} />
       </Routes>
     </div>
   );
