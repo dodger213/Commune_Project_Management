@@ -333,9 +333,18 @@ export function Projects(project) {
                                     {title}
                                 </div>
                                 <div className=" flex gap-[10px] justify-center items-center mt-[10px]">
-                                    <span className=" w-[10px] h-[10px] rounded-[50%] bg-red-600"></span>
+                                    {/* <span className=" w-[10px] h-[10px] rounded-[50%] bg-red-600"></span> */}
                                     <span className=" text-red-600">
-                                        {status}
+                                        <Label color={status === 'Idea'
+                                            ? 'primary'
+                                            :
+                                            project.status === 'To do'
+                                                ? 'error'
+                                                : project.status === 'In progress'
+                                                    ? 'warning'
+                                                    : 'success'}>{status}
+                                        </Label>
+                                        {/* {status} */}
                                     </span>
                                 </div>
                                 <div className="w-full px-[40px] justify-center items-center text-center mt-[20px]">
