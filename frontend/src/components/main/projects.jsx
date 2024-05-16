@@ -246,7 +246,7 @@ export function Projects(project) {
                     </div>
                 </div>
 
-                <div className="h-full flex flex-col justify-start" style={{ fontFamily: 'Smack' }}>
+                <div className="h-full flex flex-col justify-start w-full" style={{ fontFamily: 'Smack' }}>
                     <div className="dark:bg-[rgb(30,30,30)] p-[10px] bg-[#f6f6f6] w-[108%] ml-[-14px] rounded-[10px] mt-[-10px]">
                         <div className=" mt-[2px]">
                             <div>
@@ -261,20 +261,18 @@ export function Projects(project) {
                                 </Label>
                             </div>
                         </div>
-                        <div className=" flex flex-col h-[100px] mb-[5px] mt-[10px] overflow-y-scroll overflow-x-hidden ">
-                            <div className="text-sm text-gray-500 dark:text-gray-400 justify-start overflow-x-hidden whitespace-pre">
-                                {
-                                    renderDescription(project.description, 45)
-                                }
+                        <div className=" flex flex-col h-[100px] w-full mb-[5px] mt-[10px] overflow-y-scroll overflow-x-hidden ">
+                            <div className="text-sm w-[98%] text-gray-500 dark:text-gray-400 whitespace-pre-line">
+                                {project.description}
                             </div>
                         </div>
                     </div>
                     <div className=" h-[25px] mt-[10px] dark:text-gray-200 flex justify-start items-center gap-[10px]">
                         <Label color={"warning"}>Site</Label>
-                        <span className="text-[10px] mt-[4px] text-gray-500 dark:text-gray-400">{project.liveDemo?.length > 0 ? <Link target="_blank" className="text-gray-500 dark:text-gray-400" to={project.liveDemo}> {project.liveDemo} </Link>: "..."}</span>
+                        <span className="text-[10px] mt-[4px] text-gray-500 dark:text-gray-400">{project.liveDemo?.length > 0 ? <Link target="_blank" className="text-gray-500 dark:text-gray-400" to={project.liveDemo}> {project.liveDemo} </Link> : "..."}</span>
                     </div>
                     <div className=" h-[25px] mt-[5px] dark:text-gray-200 flex justify-start items-center gap-[10px]">
-                        <Label color={"error"}>Repo</Label> 
+                        <Label color={"error"}>Repo</Label>
                         <span className="text-gray-500 dark:text-gray-400 text-[10px] mt-[4px]">{project.githubLink?.length > 0 ? <Link target="_blank" className="text-gray-500 dark:text-gray-400" to={project.githubLink}> {project.githubLink} </Link> : "..."}</span>
                     </div>
                     <div className="pb-[5px] mt-[5px] px-[0px] w-full flex items-center justify-start">
@@ -332,7 +330,7 @@ export function Projects(project) {
                                     </div>
                                 </div>
                                 <div className="w-full whitespace-pre justify-center items-center text-center mt-[30px] text-[20px] text-[rgb(25,118,210)] dark:text-gray-300">
-                                    {renderDescription(title, 50)}
+                                    {title}
                                 </div>
                                 <div className=" flex gap-[10px] justify-center items-center mt-[10px]">
                                     <span className=" w-[10px] h-[10px] rounded-[50%] bg-red-600"></span>
@@ -340,9 +338,10 @@ export function Projects(project) {
                                         {status}
                                     </span>
                                 </div>
-                                <div className="w-full px-[20px] justify-center items-center text-center mt-[20px]">
-                                    <div className=" w-full h-[100px] text-[14px] overflow-y-scroll dark:text-gray-300 whitespace-pre">
-                                        {renderDescription(description, 70)}
+                                <div className="w-full px-[40px] justify-center items-center text-center mt-[20px]">
+                                    <div className=" w-full h-[200px] text-[14px] text-left overflow-y-scroll dark:text-gray-300 whitespace-pre-line">
+                                        {/* {renderDescription(description, 70)} */}
+                                        {description}
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center items-center mb-[50px]" style={{ fontFamily: 'Smack' }}>

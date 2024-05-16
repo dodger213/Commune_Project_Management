@@ -6,7 +6,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import metaIcon from '../assets/metamask-icon.svg'
-import logo from '../assets/commune.gif'
+import logo from '../assets/comai-logo.png'
 
 import { logOut } from "../redux/actions/usersAction";
 

@@ -96,7 +96,6 @@ function ProfilePage() {
                                     <Link target='_blank' className='text-navy-700 dark:text-gray-200' to={userData?.githubLink}> {userData?.githubLink} </Link>
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>

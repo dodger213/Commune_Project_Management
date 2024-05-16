@@ -298,14 +298,14 @@ function ProjectCpn() {
                             }
 
                         </div>
-                        <div className="w-[75%] px-3 cursor-pointer mt-[-20px]" style={{ fontFamily: 'Smack' }}>
+                        <div className="w-[75%] px-3 mt-[-20px]" style={{ fontFamily: 'Smack' }}>
                             <div className="items-center">
                                 <div className="mb-1 pt-[30px] overflow-scroll text-xl font-medium text-[rgb(25,118,210)] dark:text-white">
                                     {/* {renderDescription(project.title, 50)} */}
                                     {project.title?.length > 40 ? project.title.slice(0, 39) + '...' : project.title}
                                 </div>
-                                <div className="text-sm overflow-scroll text-gray-500 dark:text-gray-400 h-[130px] w-[100%] overflow-x-hidden whitespace-pre">
-                                    {renderDescription(project.description, 70)}
+                                <div className="text-sm overflow-scroll text-gray-500 dark:text-gray-400 h-[130px] w-[98%] overflow-x-hidden whitespace-pre-line">
+                                    {project.description}
                                 </div>
                                 <div className=" h-[25px] mt-[20px] dark:text-gray-200 flex justify-start items-center gap-[10px]">
                                     <Label color={"warning"}>Site</Label>
