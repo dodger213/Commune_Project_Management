@@ -148,7 +148,7 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
             <div className='flex justify-center'>
                 {/* <input className='search-input' onChange={({ target: { value } }) => setKeyword(value)} placeholder='Input project title, descriptin' />
                 <button className='search-button' onClick={handleSearch}>Search</button> */}
-                <div className=' dark:bg-[rgb(27,27,27)] items-center justify-between w-[50%] flex rounded-full shadow-lg p-2 mb-3 sticky' style={{ marginTop: '5px' }}>
+                <div className=' dark:bg-[rgb(27,27,27)] items-center justify-between w-[80%] flex rounded-full shadow-lg p-2 mb-3 sticky' style={{ marginTop: '5px' }}>
                     <div>
                         <div onClick={handleBack} className='p-2 mr-1 rounded-full hover:bg-white dark:hover:bg-[rgb(75,85,99)] cursor-pointer'>
 
