@@ -6,8 +6,9 @@ import { Menu, Transition } from '@headlessui/react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import metaIcon from '../assets/metamask-icon.svg'
+import polIcon from '../assets/polkadot-new-dot-logo.svg'
 import logo from '../assets/comai-logo.png'
-
+import PolkadotWalletButton from "./main/components/polkadot-wallet-button";
 import { logOut } from "../redux/actions/usersAction";
 
 
@@ -215,8 +216,8 @@ const Header = () => {
             </Menu>}
           </div>
           <div
-            style={{ display: "flex", gap: 12 }}
-            className="flex flex-col items-center justify-center ml-[1px]"
+            style={{ display: "flex" }}
+            className="flex items-center justify-center ml-[1px] gap-[25px]"
           >
             <ConnectButton.Custom>
               {({
@@ -253,10 +254,10 @@ const Header = () => {
                       if (!connected) {
                         return (
                           <div className="flex gap-[10px] justify-center items-center">
-                            <img className="w-[30px]" src={metaIcon} alt="" />
-                            <span onClick={openConnectModal} className='dark:text-white cursor-pointer text-[#5298e9] text-[18px] sm:text-base md:text-[18px] transition-all evermore hover:opacity-[0.7] no-underline rounded-full dark:hover:text-white hover:text-blue-800' style={{ fontFamily: 'Smack' }}>
+                            <img onClick={openConnectModal} className="w-[30px] cursor-pointer hover:w-[40px] transition-all" src={metaIcon} alt="" />
+                            {/* <span onClick={openConnectModal} className='dark:text-white cursor-pointer text-[#5298e9] text-[18px] sm:text-base md:text-[18px] transition-all evermore hover:opacity-[0.7] no-underline rounded-full dark:hover:text-white hover:text-blue-800' style={{ fontFamily: 'Smack' }}>
                               Connect
-                            </span>
+                            </span> */}
                           </div>
                         );
                       }
@@ -333,6 +334,9 @@ const Header = () => {
                 );
               }}
             </ConnectButton.Custom>
+            <div>
+                <PolkadotWalletButton/>
+            </div>
           </div>
         </nav>
 

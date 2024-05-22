@@ -95,6 +95,7 @@ const EditProfilePage = () => {
                             <div className='flex justify-start w-full items-start flex-col'>
                                 <label className="block w-full text-[17px] font-medium mb-2 dark:text-white text-start">Email</label>
                                 <input
+                                    disabled
                                     value={userData?.email}
                                     onChange={({ target: { value: email } }) => {
                                         setUserData({ ...userData, email });
