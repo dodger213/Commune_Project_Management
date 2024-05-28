@@ -9,7 +9,7 @@ import { Autocomplete, MenuItem } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import axios from 'axios';
 import { NotificationManager } from "react-notifications";
-
+import loading from "../../../assets/loading.gif"
 
 
 
@@ -29,12 +29,15 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
     const defaultAvatar = "./images/commune.gif";
     const [keyword, setKeyword] = useState('');
     const [visibleProjects, setVisibleProjects] = useState([])
+    const [isloading1, setIsLoading1] = useState(true);
+    const [isloading2, setIsLoading2] = useState(true);
 
     useEffect(() => {
         const fetchDevelopers = async () => {
             try {
                 const { data: { users } } = await axios.get(process.env.REACT_APP_API_BASE_URL + "/users/devs")
                 setDevelopers(users);
+                setIsLoading1(false)
             } catch (e) {
                 NotificationManager.error('Error fetching Developers', 'Error')
 
@@ -44,6 +47,7 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
             try {
                 const { data: { users } } = await axios.get(process.env.REACT_APP_API_BASE_URL + "/users/pms")
                 setPms(users);
+                setIsLoading2(false)
             } catch (e) {
                 NotificationManager.error('Error fetching Pms', 'Error')
             }
@@ -161,7 +165,7 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
 
                     <input value={keyword} onChange={({ target: { value } }) => setKeyword(value)} className='font-bold rounded-full w-full py-[0.65rem] pl-4 text-gray-700 dark:text-white bg-gray-200 dark:bg-[rgb(50,50,50)] leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs' type='text' placeholder='Input bounty title, description' />
 
-                    <div className='bg-gray-600 p-2 hover:bg-blue-400 cursor-pointer mx-2 rounded-full' onClick={()=>handleSearch(keyword)}>
+                    <div className='bg-gray-600 p-2 hover:bg-blue-400 cursor-pointer mx-2 rounded-full' onClick={() => handleSearch(keyword)}>
 
                         <svg className='w-5 h-5 text-white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
                             <path fillRule='evenodd' d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z' clipRule='evenodd' />
@@ -173,7 +177,7 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
 
 
             </div>
-            <div className='px-[30px] w-full flex justify-between mr-[320px]'>
+            <div className='px-[100px] w-full flex justify-between mr-[320px]'>
                 <div className={`text-[20px] text-[#909090] ${visibleProjects.length > 0 ? '' : 'invisible'}`}>
                     {`${visibleProjects.length} project${visibleProjects.length === 1 ? '' : 's'} `}
                 </div>
@@ -197,8 +201,11 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
                 }
             </div>
 
-            <div className=' flex flex-wrap justify-start gap-[10px]'>
-                {
+            <div className=' flex flex-wrap justify-center gap-[10px]'>
+                {isloading1 && isloading2 ? <div className=" flex flex-col gap-[30px] justify-center items-center">
+                    <span className=" dark:text-white text-2xl">Loading Bounties</span>
+                    <img className="w-[80px] mt-[-20px]" src={loading} alt="" />
+                </div> :
                     visibleProjects.length === 0 ? <div className='w-full flex items-center justify-center text-center text-[20px] text-[#909090]'>
                         <svg style={{ marginTop: '3px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />

@@ -17,10 +17,11 @@ import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 import axios from 'axios';
 import { blue } from '@mui/material/colors';
+import loading from "../../../../assets/loading.gif"
 
 // ----------------------------------------------------------------------
 
-export default function UserPage({ userData }) {
+export default function UserPage({ userData, isLoading }) {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -110,50 +111,54 @@ export default function UserPage({ userData }) {
           onFilterName={handleFilterByName}
           className="dark:text-gray-400"
         />
-
-        <TableContainer sx={{ overflow: 'unset',color: "blue" }}>
-          <Table sx={{ minWidth: 800 , color: blue}}>
-            <UserTableHead
-              order={order}
-              orderBy={orderBy}
-              rowCount={data.length}
-              numSelected={selected.length}
-              onRequestSort={handleSort}
-              onSelectAllClick={handleSelectAllClick}
-              sx={{color:blue}}
-              headLabel={[
-                { id: 'name', label: 'Name' },
-                { id: 'email', label: 'Email' },
-                // { id: 'project', label: 'Age' },
-                // { id: 'tech', label: 'TechStack', align: 'center' },
-                { id: 'role', label: 'Role' },
-                { id: 'github', label: 'Github' },
-                { id: '' },
-              ]}
-              style={{color:"blue"}}
-            />
-            <TableBody>
-              {dataFiltered
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <UserTableRow
-                    fetchUserData={fetchUserData}
-                    key={row?._id}
-                    {...row}
-                    selected={selected.indexOf(row.name) !== -1}
-                    handleClick={(event) => handleClick(event, row.name)}
-                  />
-                ))}
-
-              <TableEmptyRows
-                height={77}
-                emptyRows={emptyRows(page, rowsPerPage, data.length)}
+        {isLoading ? <div className=" flex flex-col gap-[30px] justify-center items-center">
+          <span className=" dark:text-white text-2xl">Loading Users</span>
+          <img className="w-[80px] mt-[-20px]" src={loading} alt="" />
+        </div> :
+          <TableContainer sx={{ overflow: 'unset', color: "blue" }}>
+            <Table sx={{ minWidth: 800, color: blue }}>
+              <UserTableHead
+                order={order}
+                orderBy={orderBy}
+                rowCount={data.length}
+                numSelected={selected.length}
+                onRequestSort={handleSort}
+                onSelectAllClick={handleSelectAllClick}
+                sx={{ color: blue }}
+                headLabel={[
+                  { id: 'name', label: 'Name' },
+                  { id: 'email', label: 'Email' },
+                  // { id: 'project', label: 'Age' },
+                  // { id: 'tech', label: 'TechStack', align: 'center' },
+                  { id: 'role', label: 'Role' },
+                  { id: 'github', label: 'Github' },
+                  { id: '' },
+                ]}
+                style={{ color: "blue" }}
               />
+              <TableBody>
+                {dataFiltered
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <UserTableRow
+                      fetchUserData={fetchUserData}
+                      key={row?._id}
+                      {...row}
+                      selected={selected.indexOf(row.name) !== -1}
+                      handleClick={(event) => handleClick(event, row.name)}
+                    />
+                  ))}
 
-              {notFound && <TableNoData query={filterName} />}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                <TableEmptyRows
+                  height={77}
+                  emptyRows={emptyRows(page, rowsPerPage, data.length)}
+                />
+
+                {notFound && <TableNoData query={filterName} />}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        }
 
         <TablePagination
           page={page}

@@ -21,6 +21,7 @@ import { Zoom } from 'react-reveal';
 import { useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 import { XCircleIcon } from "@heroicons/react/24/solid";
+import loading from "../../../assets/loading.gif"
 
 export default function UserTableRow({
   fetchUserData,
@@ -41,9 +42,7 @@ export default function UserTableRow({
 
   const [avatarFile, setAvatarFile] = useState("./images/12.png");
   const [updateRole, setUpdateRole] = useState(role);
-  const { user,isLogged } = useSelector((state) => state.users);
-
-
+  const { user, isLogged } = useSelector((state) => state.users);
   const [open, setOpen] = useState(null);
 
   const handleOpenMenu = (event) => {
@@ -141,44 +140,44 @@ export default function UserTableRow({
 
   return (
     <>
-      <TableRow hover tabIndex={-1} project="checkbox" selected={selected} >
-        <TableCell padding="checkbox">
-        </TableCell>
+        <TableRow hover tabIndex={-1} project="checkbox" selected={selected} >
+          <TableCell padding="checkbox">
+          </TableCell>
 
-        <TableCell component="th" scope="row" padding="none" className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            {/* <img className='w-[50px] rounded-[50%]' alt={discordName} src={`${process.env.REACT_APP_API_BASE_URL}/${avatar}`} /> */}
-            <img onClick={handleDetail} className='w-[50px] h-[50px] rounded-[50%] cursor-pointer' src={(avatar === 'default' || !avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_BASE_URL}/${avatar}`} alt="" />
-            {/* <UserAvatar user={user}/> */}
-            <Typography variant="subtitle2" noWrap style={{ fontFamily: 'Smack' }}>
-              {discordName}
-            </Typography>
-          </Stack>
-        </TableCell>
+          <TableCell component="th" scope="row" padding="none" className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>
+            <Stack direction="row" alignItems="center" spacing={2}>
+              {/* <img className='w-[50px] rounded-[50%]' alt={discordName} src={`${process.env.REACT_APP_API_BASE_URL}/${avatar}`} /> */}
+              <img onClick={handleDetail} className='w-[50px] h-[50px] rounded-[50%] cursor-pointer' src={(avatar === 'default' || !avatar) ? '/images/12.png' : `${process.env.REACT_APP_API_BASE_URL}/${avatar}`} alt="" />
+              {/* <UserAvatar user={user}/> */}
+              <Typography variant="subtitle2" noWrap style={{ fontFamily: 'Smack' }}>
+                {discordName}
+              </Typography>
+            </Stack>
+          </TableCell>
 
-        <TableCell className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{email}</TableCell>
+          <TableCell className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{email}</TableCell>
 
-        {/* <TableCell className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{age}</TableCell>
+          {/* <TableCell className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{age}</TableCell>
 
         <TableCell align="center" className=' dark:text-gray-200' style={{ fontFamily: 'Smack' }}>{techStack}</TableCell> */}
 
-        <TableCell>
-          {role.map((aRole, idx) =>
-            <div className='m-[3px]'>
-              <Label key={idx} color={aRole === 'Developer' ? 'success' : 'error'}>{aRole}</Label>
-            </div>
-          )}
-        </TableCell>
-        <TableCell className=' dark:text-gray-200'>
-          <Link to={githubLink} target='_blank' className='dark:text-gray-200'>{githubLink}</Link>
-        </TableCell>
+          <TableCell>
+            {role.map((aRole, idx) =>
+              <div className='m-[3px]'>
+                <Label key={idx} color={aRole === 'Developer' ? 'success' : 'error'}>{aRole}</Label>
+              </div>
+            )}
+          </TableCell>
+          <TableCell className=' dark:text-gray-200'>
+            <Link to={githubLink} target='_blank' className='dark:text-gray-200'>{githubLink}</Link>
+          </TableCell>
 
-        {user?.role.some((aRole) => aRole === 'Administrator') && < TableCell align="right">
-          <IconButton onClick={handleOpenMenu} className=' dark:text-gray-200'>
-            <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
-        </TableCell>}
-      </TableRow >
+          {user?.role.some((aRole) => aRole === 'Administrator') && < TableCell align="right">
+            <IconButton onClick={handleOpenMenu} className=' dark:text-gray-200'>
+              <Iconify icon="eva:more-vertical-fill" />
+            </IconButton>
+          </TableCell>}
+        </TableRow >
 
       <Popover
         open={!!open}
@@ -288,19 +287,19 @@ export default function UserTableRow({
                     </div>
                     {isLogged && user?.role.some((a) => a === 'Administrator') && [
                       <div className='flex pt-[10px]'>
-                      <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Developer'))} onChange={(e) => handleRoleChange('Developer')} />} label="Developer" />
-                      <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Project Manager'))} onChange={(e) => handleRoleChange('Project Manager')} />} label="Project Manager" />
-                      <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Administrator'))} onChange={(e) => handleRoleChange('Administrator')} />} label="Administrator" />
-                    </div>,
-                    <div className=' flex justify-center items-center w-full mt-[50px] mb-[40px]'>
-                    <div onClick={handleSaveUser} style={{ fontFamily: 'Might', width: '200px', fontSize: '18px', transition: '0.1s' }} className="relative rounded-[15px]  cursor-pointer group font-medium no-underline flex p-2 text-white items-center justify-center content-center focus:outline-none">
-                      <span className="absolute top-0 left-0 w-full h-full rounded-[15px] opacity-50 filter blur-sm bg-gradient-to-br from-[#256fc4] to-[#256fc4]"  ></span>
-                      <span className="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-[#256fc4] to-[#256fc4]"></span>
-                      <span className="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-[#256fc4] to-[#256fc4]"></span>
-                      <span className="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-[#256fc4] from-[#256fc4]"></span>
-                      <span className="relative">Save</span>
-                    </div>
-                  </div>
+                        <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Developer'))} onChange={(e) => handleRoleChange('Developer')} />} label="Developer" />
+                        <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Project Manager'))} onChange={(e) => handleRoleChange('Project Manager')} />} label="Project Manager" />
+                        <FormControlLabel control={<Checkbox defaultChecked={role.some((aRole => aRole === 'Administrator'))} onChange={(e) => handleRoleChange('Administrator')} />} label="Administrator" />
+                      </div>,
+                      <div className=' flex justify-center items-center w-full mt-[50px] mb-[40px]'>
+                        <div onClick={handleSaveUser} style={{ fontFamily: 'Might', width: '200px', fontSize: '18px', transition: '0.1s' }} className="relative rounded-[15px]  cursor-pointer group font-medium no-underline flex p-2 text-white items-center justify-center content-center focus:outline-none">
+                          <span className="absolute top-0 left-0 w-full h-full rounded-[15px] opacity-50 filter blur-sm bg-gradient-to-br from-[#256fc4] to-[#256fc4]"  ></span>
+                          <span className="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-[#256fc4] to-[#256fc4]"></span>
+                          <span className="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-[#256fc4] to-[#256fc4]"></span>
+                          <span className="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-[#256fc4] from-[#256fc4]"></span>
+                          <span className="relative">Save</span>
+                        </div>
+                      </div>
                     ]}
                   </div>
                 </div>

@@ -64,13 +64,15 @@ const Header = () => {
     <div className=" fixed w-full z-[99] bg-[#ffffff] dark:bg-[rgb(18,18,18)] transition-all py-1 sm:py-2 md:py-3 flex items-center justify-between shadow-md dark:bg-[#000000]">
       <div className="flex items-center justify-between w-full max-w-[1750px] px-4 mx-auto sm:px-6 md:px-8">
         <div className="flex justify-center items-center gap-2">
-          <a href='/'>
+          <span onClick={() => {
+            navigate(isLogged ? '/dashboard' : '/')
+          }}>
             <img
               src={logo}
               alt="Logo"
               className="cursor-pointer sm:h-[70px] h-[50px]"
             />
-          </a>
+          </span>
           <span onClick={() => {
             navigate(isLogged ? '/dashboard' : '/')
           }} className=' no-underline dark:text-white transition-all'><p className=' cursor-pointer text-[24px] font-bold mt-[7px]'>Commune Management v1.2</p></span>
@@ -335,7 +337,7 @@ const Header = () => {
               }}
             </ConnectButton.Custom>
             <div>
-                <PolkadotWalletButton/>
+              <PolkadotWalletButton />
             </div>
           </div>
         </nav>
