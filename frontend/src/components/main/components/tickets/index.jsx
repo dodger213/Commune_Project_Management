@@ -67,7 +67,7 @@ function Ticket({
 
                         </div>
                     </div>
-                    <div className='dropdown'>
+                    {(isManager || isAdmin || isDeveloper) && <div className='dropdown'>
                         <Dropdown inline label="" className=" pl-0 dark:text-gray-200" style={{ paddingLeft: "0" }}>
                             <>
                                 <Dropdown.Item onClick={() => {
@@ -96,7 +96,7 @@ function Ticket({
                                 </Dropdown.Item>}
                             </>
                         </Dropdown>
-                    </div>
+                    </div>}
                 </div>
                 <div
                     className='text-base text-slate-700 p-2 item-content before:bg-red-500 h-[100px] w-full overflow-y-scroll dark:text-gray-200 overflow-x-hidden whitespace-pre'>

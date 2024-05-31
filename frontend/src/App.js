@@ -148,7 +148,6 @@ const App = () => {
             <Routes>
               <Route>
                 <Route path="*" element={<Layout />} />
-                <Route path="/" element={<Dashboard />} />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="signup" element={<SignupPage />} />
               </Route>
@@ -172,7 +171,8 @@ const Layout = () => {
     <div className="flex w-full dark:bg-[rgb(18,18,18)] bg-[rgb(249,250,251)]">
       <Nav />
       <Routes>
-        <Route path="all-bounties" element={<Dashboard />} />
+        <Route path="bounties" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="payment-request" element={<BountyRequest />} />
         <Route path="review-request" element={<ReviewRequestProjects />} />
         <Route path="my-bounties" element={<MyProjects />} />
@@ -180,7 +180,7 @@ const Layout = () => {
         <Route path="new-ideas" element={<NewIdea />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="profile/edit" element={<EditProfilePage />} />
-        <Route path="all-users" element={<AllUsers />} />
+        <Route path="users" element={<AllUsers />} />
         <Route path="developers" element={<Devs />} />
         <Route path="project-managers" element={<Pms />} />
         <Route path="administrators" element={<Admins />} />

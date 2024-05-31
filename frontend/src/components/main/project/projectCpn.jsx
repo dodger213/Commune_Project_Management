@@ -126,6 +126,7 @@ function ProjectCpn() {
                     developer,
                     project: project?._id
                 }
+            console.log(data);
             if (!activeTicket) {
                 await axios.post(process.env.REACT_APP_API_BASE_URL + "/ticket/new", data)
                 NotificationManager.success('Created a ticket successfully', 'Success')
@@ -183,6 +184,17 @@ function ProjectCpn() {
         }
         if (status === 'Completed') {
             if (!(isAdmin)) {
+                NotificationManager.error('Unallowed operation!', "Error");
+                return;
+            }
+            setShowConvetti(true);
+            setTimeout(() => {
+                setShowConvetti(false);
+            }, 2500);
+        }
+        if (status === 'Bounty Request') {
+            console.log(isManager, isAdmin);
+            if (!(isManager || isAdmin)) {
                 NotificationManager.error('Unallowed operation!', "Error");
                 return;
             }
@@ -276,7 +288,6 @@ function ProjectCpn() {
             const isAlready = project.disLikes.includes(user?._id);
             const update = isAlready ? { ...project, disLikes: project.disLikes.filter((a) => a !== user?._id) }
                 : { ...project, disLikes: [...project.disLikes, user?._id] }
-            console.log(update);
             await axios.put(process.env.REACT_APP_API_BASE_URL + '/project/' + project?._id, update)
             fetchProjectData();
         } catch (e) {
@@ -458,7 +469,7 @@ function ProjectCpn() {
                     <div key={idx} className='relative w-full m-0'>
                         <div className='absolute w-full  flex'>
                             {[1, 2, 3, 4, 5].map((a, idx) => <div key={idx} className='border-1 border-dashed dark:border-gray-300 w-full'
-                            
+
                             >
                                 <div className='h-[310px]'></div>
                             </div>)}

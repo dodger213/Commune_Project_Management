@@ -16,6 +16,18 @@ exports.getProjectTicket = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+exports.getAllTickets = async (req, res) => {
+    try {
+        const ticket = await ticketModel.find({
+        })
+        res.status(200).json({
+            message: "Get all tickets successfully.",
+            tickets: ticket,
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
 
 
 exports.createATicket = async (req, res) => {

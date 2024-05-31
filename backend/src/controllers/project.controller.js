@@ -171,8 +171,16 @@ exports.createAProject = async (req, res) => {
 exports.updateAProject = async (req, res) => {
     try {
         const { id: projectId } = req.params;
+        const previous = await projectModel.findById(projectId);
+        const removingDevs = previous.developers.filter((a) => !req.body.developers.some((b) => b == a));
+        console.log('removing', removingDevs);
+        removingDevs.map(async (a) => {
+            const result = await ticketModel.deleteMany({
+                project: projectId,
+                developer: a
+            })
+        })
         const project = await projectModel.findByIdAndUpdate(projectId, req.body, { new: true, runValidators: true });
-
         if (!project) {
             return res.status(404).json({ msg: `No project with id: ${projectId}` });
         } else {

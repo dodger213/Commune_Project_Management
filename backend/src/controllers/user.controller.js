@@ -159,7 +159,7 @@ exports.updateAUser = async (req, res) => {
   try {
     const { id: userId } = req.params;
     const existing = await UserModel.find({ email: { $eq: req.body.email } });
-    if (existing.length !== 0 && existing[0]?._id != req.body._id) {
+    if (existing[0]._id != req.body._id) {
       return res.status(409).json({
         msg: `Another user registered as email ${req.body.email}`,
       });
@@ -175,7 +175,7 @@ exports.updateAUser = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(500).json({ msg: error.message });   
+    res.status(500).json({ msg: error.message });
   }
 };
 

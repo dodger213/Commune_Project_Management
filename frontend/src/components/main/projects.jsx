@@ -232,7 +232,8 @@ export function Projects(project) {
 
                         <h5
                             onClick={() => {
-                                if (project.status === 'In progress') {
+                                console.log('clicked', project.status);
+                                if (project.status !== 'Idea' && project.status !== 'To do') {
                                     navigate('/project/' + project?._id)
                                 }
                             }}

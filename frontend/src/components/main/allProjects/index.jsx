@@ -10,7 +10,8 @@ import CheckIcon from "@mui/icons-material/Check";
 import axios from 'axios';
 import { NotificationManager } from "react-notifications";
 import loading from "../../../assets/loading.gif"
-
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 
 export default function AllProjects({ data, fetchProjects, viewMode, isDashboard }) {
@@ -31,7 +32,8 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
     const [visibleProjects, setVisibleProjects] = useState([])
     const [isloading1, setIsLoading1] = useState(true);
     const [isloading2, setIsLoading2] = useState(true);
-
+    const [activeStatus, setActiveStatus] = useState(0);
+    const projectStatus = ['All', 'Idea', 'To do', 'In progress', 'Review Request', 'Payment Request', 'Completed']
     useEffect(() => {
         const fetchDevelopers = async () => {
             try {
@@ -138,17 +140,37 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
         }
         setOpenNewIdeaModal(false);
     }
-    const handleSearch = (k) => {
-        setVisibleProjects(projects.filter((a) => a.title.toUpperCase().indexOf(k.toUpperCase()) !== -1 || a.description.toUpperCase().indexOf(k.toUpperCase()) !== -1))
+    const handleSearch = async (k, status) => {
+        let classifiedProjects = projects;
+        if (projectStatus[status] !== 'Review Request' && projectStatus[status] !== 'Payment Request') {
+            if (status !== 0) {
+                classifiedProjects = projects.filter((a) => a.status === projectStatus[status])
+            }
+            classifiedProjects = (classifiedProjects.filter((a) => a.title.toUpperCase().indexOf(k.toUpperCase()) !== -1 || a.description.toUpperCase().indexOf(k.toUpperCase()) !== -1))
+
+        } else {
+            const { data: { tickets } } = await axios.get(process.env.REACT_APP_API_BASE_URL + "/ticket");
+            if (projectStatus[status] === 'Review Request') {
+                classifiedProjects = (classifiedProjects.filter((a) => {
+                    return tickets.some((b) => b.project == a._id && b.reviewRequire === true)
+                }))
+            }
+            else {
+                classifiedProjects = (classifiedProjects.filter((a) => {
+                    return tickets.some((b) => b.project == a._id && b.status === 'Bounty Request')
+                }))
+            }
+        }
+        setVisibleProjects(classifiedProjects.filter((a) => a.title.toUpperCase().indexOf(k.toUpperCase()) !== -1 || a.description.toUpperCase().indexOf(k.toUpperCase()) !== -1))
     }
 
     const handleBack = () => {
         setKeyword('')
-        handleSearch("");
+        handleSearch("", activeStatus);
     }
 
     return (
-        <div className='w-full flex flex-col gap-[30px] justify-center mt-[50px] mb-[50px]'>
+        <div className='w-full flex flex-col gap-[30px] justify-start mt-[50px] mb-[50px]'>
             <div className='flex justify-center'>
                 {/* <input className='search-input' onChange={({ target: { value } }) => setKeyword(value)} placeholder='Input project title, descriptin' />
                 <button className='search-button' onClick={handleSearch}>Search</button> */}
@@ -165,7 +187,7 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
 
                     <input value={keyword} onChange={({ target: { value } }) => setKeyword(value)} className='font-bold rounded-full w-full py-[0.65rem] pl-4 text-gray-700 dark:text-white bg-gray-200 dark:bg-[rgb(50,50,50)] leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs' type='text' placeholder='Input bounty title, description' />
 
-                    <div className='bg-gray-600 p-2 hover:bg-blue-400 cursor-pointer mx-2 rounded-full' onClick={() => handleSearch(keyword)}>
+                    <div className='bg-gray-600 p-2 hover:bg-blue-400 cursor-pointer mx-2 rounded-full' onClick={() => handleSearch(keyword, activeStatus)}>
 
                         <svg className='w-5 h-5 text-white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
                             <path fillRule='evenodd' d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z' clipRule='evenodd' />
@@ -176,6 +198,19 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
                 </div>
 
 
+            </div>
+            <div className='flex justify-center'>
+                <ButtonGroup size="medium" aria-label="Small button group">
+                    {projectStatus.map((a, idx) => (
+                        <Button style={{fontFamily: 'Smack'}} className=' dark:text-white border-2' variant={idx === activeStatus ? 'contained' : 'outlined'} key={idx}
+                            onClick={() => {
+                                handleSearch(keyword, idx)
+                                setKeyword('')
+                                setActiveStatus(idx)
+                            }}
+                        >{a}</Button>
+                    ))}
+                </ButtonGroup>
             </div>
             <div className='px-[100px] w-full flex justify-between mr-[320px]'>
                 <div className={`text-[20px] text-[#909090] ${visibleProjects.length > 0 ? '' : 'invisible'}`}>
