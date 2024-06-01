@@ -5,7 +5,7 @@ const userModel = require("../models/user.model");
 
 exports.getAllProject = async (req, res) => {
     try {
-        const project = await projectModel.find({ status: { $ne: 'Idea' } })
+        const project = await projectModel.find()
             .populate('developers')
             .populate('pms')
             ;
