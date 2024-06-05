@@ -75,7 +75,7 @@ const Header = () => {
           </span>
           <span onClick={() => {
             navigate(isLogged ? '/bounties' : '/bounties')
-          }} className=' no-underline dark:text-white transition-all'><p className=' cursor-pointer text-[24px] font-bold mt-[7px]'>Commune Management v2.0</p></span>
+          }} className=' no-underline dark:text-white transition-all'><p className=' cursor-pointer text-[24px] font-bold mt-[7px]'>Commune Management v2.2</p></span>
         </div>
         <nav className="flex-wrap gap-3 items-center hidden space-x-4 pc-menu md:flex">
           <div className=''>

@@ -33,7 +33,7 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
     const [isloading1, setIsLoading1] = useState(true);
     const [isloading2, setIsLoading2] = useState(true);
     const [activeStatus, setActiveStatus] = useState(0);
-    const projectStatus = ['All', 'Idea', 'To do', 'In progress', 'Review Request', 'Payment Request', 'Completed']
+    const projectStatus = ['All', 'Idea', 'Rejected', 'To do', 'In progress', 'Review Request', 'Payment Request', 'Completed']
     useEffect(() => {
         const fetchDevelopers = async () => {
             try {
@@ -202,7 +202,7 @@ export default function AllProjects({ data, fetchProjects, viewMode, isDashboard
             <div className='flex justify-center'>
                 <ButtonGroup size="medium" aria-label="Small button group">
                     {projectStatus.map((a, idx) => (
-                        <Button style={{fontFamily: 'Smack'}} className=' dark:text-white border-2' variant={idx === activeStatus ? 'contained' : 'outlined'} key={idx}
+                        <Button style={{ fontFamily: 'Smack' }} className=' dark:text-white border-2' variant={idx === activeStatus ? 'contained' : 'outlined'} key={idx}
                             onClick={() => {
                                 handleSearch(keyword, idx)
                                 setKeyword('')
